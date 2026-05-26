@@ -109,7 +109,7 @@
   max-width: 540px;
 }
 
-/* ---------- Info items — 2×2 grid ---------- */
+/* ---------- Info items — 2×3 grid (Email/Phone, Location/LinkedIn, GitHub/Behance) ---------- */
 .contact__info-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -127,7 +127,7 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.75rem 0;
+  padding: 0.5rem 0;
   text-decoration: none;
   color: inherit;
   cursor: default;

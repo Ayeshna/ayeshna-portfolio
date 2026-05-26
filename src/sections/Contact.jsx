@@ -8,6 +8,8 @@ import {
   Send,
   ArrowUpRight,
   Plus,
+  Github,
+  Palette,
 } from 'lucide-react'
 import '../styles/Contact.css'
 
@@ -86,6 +88,18 @@ function Contact() {
       label: 'LinkedIn',
       value: 'Connect on LinkedIn',
       href: 'https://www.linkedin.com/in/ayeshna-vinayak/',
+    },
+    {
+      icon: Github,
+      label: 'GitHub',
+      value: 'github.com/Ayeshna',
+      href: 'https://github.com/Ayeshna',
+    },
+    {
+      icon: Palette,
+      label: 'Behance',
+      value: 'behance.net/ayeshna31',
+      href: 'https://www.behance.net/ayeshna31',
     },
   ]
 
