@@ -21,8 +21,8 @@ function Contact() {
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, margin: '-60px' })
 
-  /* ── Formspree endpoint — replace YOUR_FORM_ID with the ID Formspree gives you ── */
-  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID'
+  /* ── Formspree endpoint — emails submissions to ayeshna19@icloud.com ── */
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xredobbg'
 
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' })
   const [status, setStatus] = useState('idle')  /* idle | sending | success | error */
