@@ -1,0 +1,229 @@
+/* ==========================================================================
+   CaseStudyHero
+   Editorial Problem / Goal / Role / Result block at the top of overlays
+   ========================================================================== */
+
+.cs-hero {
+  padding: 1.75rem 1.75rem 2rem;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 255, 65, 0.03) 0%,
+      transparent 70%
+    );
+  background-color: #08090C;
+  flex-shrink: 0;
+}
+
+/* ---------- Meta line — sector · year · role ---------- */
+.cs-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(0, 255, 65, 0.15);
+}
+
+.cs-hero__sep {
+  color: rgba(0, 255, 65, 0.4);
+}
+
+/* ---------- 2x2 + 2 grid for blocks ---------- */
+.cs-hero__grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 720px) {
+  .cs-hero__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem 2rem;
+  }
+  /* Wide blocks span both columns */
+  .cs-block--wide {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ---------- Individual block ---------- */
+.cs-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.cs-block__label {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: 'Heavitas', sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 1;
+}
+
+/* Green dash before each label */
+.cs-block__label::before {
+  content: '';
+  width: 18px;
+  height: 1.5px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.cs-block__label--accent {
+  color: var(--accent);
+}
+
+.cs-block__label--accent::before {
+  background: var(--accent);
+  box-shadow: 0 0 8px rgba(0, 255, 65, 0.6);
+}
+
+.cs-block__body {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* ---------- Bullet lists (Role + Result) ---------- */
+.cs-block__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.cs-block__list li {
+  position: relative;
+  padding-left: 1.25rem;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* Role list bullets — plain dash */
+.cs-block__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 8px;
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* Result list bullets — green arrow */
+.cs-block__list--result li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: auto;
+  height: auto;
+  background: transparent;
+  color: var(--accent);
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.35);
+}
+
+.cs-block__list--result li {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+/* ---------- Result block — subtle green tint ---------- */
+.cs-block--result {
+  padding: 1.1rem 1.25rem;
+  border: 1px solid rgba(0, 255, 65, 0.18);
+  background: rgba(0, 255, 65, 0.025);
+  border-radius: 4px;
+  margin-top: 0.5rem;
+  position: relative;
+}
+
+/* Editorial plus marks at result block corners */
+.cs-block--result::before,
+.cs-block--result::after {
+  content: '+';
+  position: absolute;
+  color: var(--accent);
+  opacity: 0.4;
+  font-family: monospace;
+  font-size: 11px;
+  line-height: 1;
+}
+.cs-block--result::before { top: -6px; left: -6px; }
+.cs-block--result::after  { top: -6px; right: -6px; }
+
+/* ---------- Inline links (live site / Instagram etc.) ---------- */
+.cs-block__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(0, 255, 65, 0.12);
+}
+
+.cs-block__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 255, 65, 0.35);
+  background: rgba(0, 255, 65, 0.06);
+  color: var(--accent);
+  font-family: 'Lato', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.cs-block__link:hover {
+  background: rgba(0, 255, 65, 0.16);
+  border-color: rgba(0, 255, 65, 0.65);
+  transform: translateY(-1px);
+}
+
+/* ---------- Mobile padding tuning ---------- */
+@media (max-width: 640px) {
+  .cs-hero {
+    padding: 1.25rem 1.25rem 1.5rem;
+  }
+  .cs-hero__meta {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+  }
+  .cs-block__body {
+    font-size: 12.5px;
+  }
+  .cs-block__list li {
+    font-size: 12px;
+  }
+}

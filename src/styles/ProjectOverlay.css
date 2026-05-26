@@ -1,0 +1,313 @@
+/* ==========================================================================
+   ProjectOverlay
+   ========================================================================== */
+
+/* ---------- Backdrop ---------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.25s ease;
+  cursor: none; /* hide system cursor — hint tag takes over */
+}
+
+.overlay--open {
+  background-color: rgba(0, 0, 0, 0.92);
+}
+
+/* ---------- Cursor-following "Scroll to Explore" hint ---------- */
+.overlay__scroll-hint {
+  position: fixed;
+  /* centred on cursor, floated just above it */
+  transform: translate(-50%, calc(-100% - 14px));
+  pointer-events: none;
+  z-index: 1100;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 255, 65, 0.3);
+  background: rgba(8, 9, 12, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  font-family: 'Lato', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.4);
+  white-space: nowrap;
+
+  transition: opacity 0.35s ease;
+}
+
+.overlay__scroll-hint-arrow {
+  display: inline-block;
+  animation: hint-bounce 1.4s ease-in-out infinite;
+  line-height: 1;
+}
+
+@keyframes hint-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(3px); }
+}
+
+/* ---------- Modal frame — centred shell, anchors plus marks ---------- */
+.overlay__frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 96%;
+  max-width: 1200px;
+  max-height: 94vh;
+  /* invisible until open — lets container's own opacity transition handle it */
+  pointer-events: none;
+}
+
+.overlay--open .overlay__frame {
+  pointer-events: auto;
+}
+
+/* Four-corner editorial plus marks */
+.overlay__plus {
+  position: absolute;
+  color: var(--accent);
+  opacity: 0;                         /* hidden until overlay opens */
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  z-index: 1200;                      /* above scroll-hint (1100) */
+  transition: opacity 0.25s ease 0.1s;
+}
+
+.overlay--open .overlay__plus {
+  opacity: 0.35;
+}
+
+.overlay__plus--tl { top: -11px;    left: -11px;   }
+.overlay__plus--tr { top: -11px;    right: -11px;  }
+.overlay__plus--bl { bottom: -11px; left: -11px;   }
+.overlay__plus--br { bottom: -11px; right: -11px;  }
+
+/* ---------- Modal container ---------- */
+.overlay__container {
+  position: relative;
+  width: 100%;
+  max-height: 94vh;
+  background-color: #08090C;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  cursor: auto;
+}
+
+.overlay--open .overlay__container {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* ---------- Vertical #00FF41 progress bar (right edge) ---------- */
+.overlay__progress {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.04);
+  z-index: 10;
+  border-radius: 0 14px 14px 0;
+  overflow: hidden;
+}
+
+.overlay__progress-fill {
+  width: 100%;
+  height: 0%;
+  background-color: var(--accent);
+  box-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
+  border-radius: 0 14px 0 0;
+  transition: height 0.1s linear;
+}
+
+/* ---------- Fixed header ---------- */
+.overlay__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 20px 24px;
+  flex-shrink: 0;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+}
+
+.overlay__header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.overlay__title {
+  margin: 0;
+  font-family: 'Heavitas', sans-serif;
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--white);
+  line-height: 1.2;
+}
+
+.overlay__category {
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+
+.overlay__close {
+  background: none;
+  border: none;
+  color: var(--grey);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 4px;
+  flex-shrink: 0;
+  transition: color 0.15s ease;
+}
+
+.overlay__close:hover {
+  color: var(--white);
+}
+
+/* ---------- Video badge in header ---------- */
+.overlay__video-badge {
+  font-family: 'Lato', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid rgba(0, 255, 65, 0.3);
+  padding: 3px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  align-self: center;
+  flex-shrink: 0;
+}
+
+/* ---------- Scrollable body ---------- */
+.overlay__body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 255, 65, 0.2) transparent;
+}
+
+.overlay__body::-webkit-scrollbar {
+  width: 3px;
+}
+.overlay__body::-webkit-scrollbar-track {
+  background: transparent;
+}
+.overlay__body::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 65, 0.2);
+  border-radius: 2px;
+}
+
+/* ---------- Video hero (top of scrollable body) ---------- */
+.overlay__video-wrap {
+  position: relative;   /* anchor for the audio toggle */
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #000;
+  flex-shrink: 0;
+  display: block;
+  line-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.overlay__video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- Mute / Unmute toggle (bottom-right of video wrap) ---------- */
+.overlay__audio-toggle {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  z-index: 20;            /* above video, below progress bar (z-10) which is on container */
+
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  border: 1px solid rgba(0, 255, 65, 0.35);
+  background: rgba(8, 9, 12, 0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  color: var(--accent);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease,
+              box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.overlay__audio-toggle:hover {
+  background: rgba(0, 255, 65, 0.12);
+  border-color: rgba(0, 255, 65, 0.65);
+  box-shadow: 0 0 14px rgba(0, 255, 65, 0.25);
+  transform: scale(1.08);
+}
+
+.overlay__audio-toggle:active {
+  transform: scale(0.96);
+}
+
+/* ---------- Content image (flush below video, or standalone) ---------- */
+.overlay__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  background-color: #0d0e12;
+  min-height: 200px;
+  margin: 0;   /* kills any UA default margin — keeps seam at zero */
+  padding: 0;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  .overlay__header {
+    padding: 16px;
+  }
+  .overlay__title {
+    font-size: 18px;
+  }
+}

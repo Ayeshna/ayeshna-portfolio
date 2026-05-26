@@ -1,0 +1,203 @@
+/* ==========================================================================
+   MobileWorkGallery — vertical expanding accordion
+   Only rendered below 768 px (desktop still uses RadialScrollGallery)
+   ========================================================================== */
+
+.mgallery {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  /* Fixed height — taller now so each collapsed row breathes (~58 px) */
+  height: 760px;
+  padding: 0 1.25rem 2rem;
+  gap: 6px;
+  margin-top: 1rem;
+}
+
+/* ---------- Individual card ---------- */
+.mgallery__item {
+  position: relative;
+  flex: 1 1 0%;                  /* collapsed — share height equally */
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background-color: #0d0e12;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  cursor: pointer;
+
+  /* Entrance transition via style prop (opacity + translateY) */
+  transition:
+    flex 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.3s ease,
+    opacity 0.45s ease,
+    transform 0.45s ease;
+}
+
+.mgallery__item--active {
+  flex: 7 1 0%;                  /* expanded — takes ~7× the collapsed height */
+  border-color: rgba(0, 255, 65, 0.28);
+  box-shadow: 0 0 0 0.5px rgba(0, 255, 65, 0.12);
+}
+
+/* ---------- Solid dark overlay — keeps title readable on every card ---------- */
+.mgallery__scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 9, 12, 0.72);     /* uniform dark tint */
+  transition: background 0.4s ease;
+}
+
+/* Active: image bleeds through more, top portion clears for visual */
+.mgallery__scrim--active {
+  background: linear-gradient(
+    to top,
+    rgba(8, 9, 12, 0.86) 0%,
+    rgba(8, 9, 12, 0.55) 30%,
+    rgba(8, 9, 12, 0.20) 80%,
+    rgba(8, 9, 12, 0.20) 100%
+  );
+}
+
+/* ---------- Label row (vertically centred — title sits in middle of card) ---------- */
+.mgallery__label {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Re-enable pointer events only on the CTA button */
+.mgallery__label > * {
+  pointer-events: auto;
+}
+
+/* ---------- Icon pill ---------- */
+.mgallery__icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(8, 9, 12, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 255, 65, 0.25);
+  color: var(--accent);
+}
+
+/* ---------- Title + category text ---------- */
+.mgallery__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.mgallery__title {
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--white);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);  /* keeps text legible */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Category — hidden on collapsed cards, fades in when active */
+.mgallery__category {
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---------- Open Project CTA ---------- */
+.mgallery__cta {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 255, 65, 0.35);
+  background: rgba(0, 255, 65, 0.08);
+  color: var(--accent);
+  font-family: 'Lato', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateX(12px);
+  transition: opacity 0.35s ease 0.12s, transform 0.35s ease 0.12s,
+              background 0.2s ease, border-color 0.2s ease;
+}
+
+.mgallery__cta:hover,
+.mgallery__cta:active {
+  background: rgba(0, 255, 65, 0.18);
+  border-color: rgba(0, 255, 65, 0.6);
+}
+
+/* ---------- VIDEO badge ---------- */
+.mgallery__video-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 3;
+  font-family: 'Lato', sans-serif;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid rgba(0, 255, 65, 0.3);
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: rgba(8, 9, 12, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.35s ease 0.1s;
+}
+
+/* ---------- Featured accent line (top edge) ---------- */
+.mgallery__featured-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent);
+  box-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
+  z-index: 3;
+}
+
+/* ---------- Section header hint on mobile ---------- */
+@media (max-width: 767px) {
+  .work__header {
+    padding: 4rem 1.25rem 0;
+  }
+}

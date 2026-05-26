@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IVG Homepage — Low-Fi Wireframe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        .wireframe {
+            width: 1440px;
+            margin: 0 auto;
+            background: #ffffff;
+            position: relative;
+        }
+
+        /* ── Annotation labels ── */
+        .annotation {
+            position: absolute;
+            font-size: 11px;
+            font-weight: 600;
+            color: #ee1b2b;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            white-space: nowrap;
+        }
+
+        .annotation::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: #ee1b2b;
+            border-radius: 50%;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+
+        /* ── Section wrapper with dashed borders ── */
+        .wf-section {
+            border: 1.5px dashed #d0d0d0;
+            margin: 0 60px;
+            position: relative;
+        }
+
+        .wf-section + .wf-section {
+            margin-top: 0;
+            border-top: none;
+        }
+
+        .wf-section-label {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            font-size: 10px;
+            font-weight: 500;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* ── Placeholder blocks ── */
+        .block {
+            background: #e8e8e8;
+            border-radius: 4px;
+        }
+
+        .block--dark {
+            background: #c0c0c0;
+        }
+
+        .block--accent {
+            background: #d4d4d4;
+        }
+
+        .text-line {
+            height: 10px;
+            background: #d0d0d0;
+            border-radius: 2px;
+        }
+
+        .text-line--short { width: 60%; }
+        .text-line--medium { width: 80%; }
+        .text-line--full { width: 100%; }
+        .text-line--title {
+            height: 16px;
+            background: #b0b0b0;
+        }
+        .text-line--heading {
+            height: 24px;
+            background: #999;
+            width: 40%;
+        }
+
+        /* ════════════════════════════════════════════
+           HEADER
+           ════════════════════════════════════════════ */
+        .wf-header {
+            padding: 0;
+            border: none;
+            margin: 0;
+        }
+
+        .wf-header__top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 60px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .wf-logo {
+            width: 60px;
+            height: 30px;
+            background: #333;
+            border-radius: 3px;
+        }
+
+        .wf-search {
+            width: 350px;
+            height: 38px;
+            border: 2px solid #e0e0e0;
+            border-radius: 20px;
+        }
+
+        .wf-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .wf-icon {
+            width: 50px;
+            height: 12px;
+            background: #ccc;
+            border-radius: 2px;
+        }
+
+        .wf-header__nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            padding: 18px 60px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .wf-nav-item {
+            width: 80px;
+            height: 10px;
+            background: #ccc;
+            border-radius: 2px;
+        }
+
+        .wf-nav-item:nth-child(odd) { width: 65px; }
+
+        /* ════════════════════════════════════════════
+           TRUST BAR
+           ════════════════════════════════════════════ */
+        .wf-trust-bar {
+            height: 40px;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            margin: 0;
+            border: none;
+        }
+
+        .wf-trust-item {
+            width: 120px;
+            height: 10px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+        }
+
+        /* ════════════════════════════════════════════
+           HERO BANNER
+           ════════════════════════════════════════════ */
+        .wf-hero {
+            height: 500px;
+            background: linear-gradient(135deg, #c0c0c0 0%, #a0a0a0 100%);
+            display: flex;
+            align-items: center;
+            padding: 0 100px;
+            position: relative;
+            margin: 0;
+            border: none;
+        }
+
+        .wf-hero__content {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-width: 500px;
+        }
+
+        .wf-hero__title {
+            height: 48px;
+            width: 380px;
+            background: rgba(255,255,255,0.4);
+            border-radius: 4px;
+        }
+
+        .wf-hero__subtitle {
+            height: 12px;
+            width: 320px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+        }
+
+        .wf-hero__cta {
+            width: 160px;
+            height: 48px;
+            background: #fff;
+            border-radius: 25px;
+            margin-top: 10px;
+        }
+
+        .wf-hero__dots {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .wf-hero__dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+        }
+
+        .wf-hero__dot--active {
+            background: #fff;
+        }
+
+        .wf-hero__image-placeholder {
+            position: absolute;
+            right: 100px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 300px;
+            height: 350px;
+            border: 2px dashed rgba(255,255,255,0.4);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* ════════════════════════════════════════════
+           CATEGORY CARDS
+           ════════════════════════════════════════════ */
+        .wf-categories {
+            padding: 50px 0;
+        }
+
+        .wf-categories__grid {
+            display: flex;
+            gap: 18px;
+            padding: 0 60px;
+            overflow: hidden;
+        }
+
+        .wf-cat-card {
+            min-width: 200px;
+            height: 380px;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .wf-cat-card__image {
+            height: 160px;
+            background: #e8e8e8;
+            position: relative;
+        }
+
+        .wf-cat-card__gradient {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(to top, #d0d0d0, transparent);
+        }
+
+        .wf-cat-card__circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px dashed #ccc;
+        }
+
+        .wf-cat-card__body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px;
+        }
+
+        .wf-cat-card__badge {
+            width: 80px;
+            height: 28px;
+            background: #c0c0c0;
+            border-radius: 14px;
+        }
+
+        .wf-cat-card__puffs {
+            width: 50px;
+            height: 32px;
+            background: #999;
+            border-radius: 4px;
+        }
+
+        .wf-cat-card__sub {
+            width: 60px;
+            height: 8px;
+            background: #ddd;
+            border-radius: 2px;
+        }
+
+        .wf-cat-card__btn {
+            width: 120px;
+            height: 36px;
+            background: #c0c0c0;
+            border-radius: 18px;
+            margin-top: 8px;
+        }
+
+        /* ════════════════════════════════════════════
+           PRODUCT GRID (Latest + Best Sellers)
+           ════════════════════════════════════════════ */
+        .wf-products {
+            padding: 50px 60px;
+            background: #fafafa;
+        }
+
+        .wf-products--white {
+            background: #fff;
+        }
+
+        .wf-products__title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .wf-products__title .text-line--heading {
+            margin: 0 auto;
+        }
+
+        .wf-products__grid {
+            display: flex;
+            gap: 18px;
+            justify-content: center;
+        }
+
+        .wf-product-card {
+            width: 200px;
+            border: 1.5px solid #e8e8e8;
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            background: #fff;
+        }
+
+        .wf-product-card__img {
+            width: 100%;
+            height: 150px;
+            background: #efefef;
+            border-radius: 10px;
+            border: 2px dashed #ddd;
+        }
+
+        .wf-product-card__name {
+            width: 80%;
+            height: 12px;
+            background: #ccc;
+            border-radius: 2px;
+        }
+
+        .wf-product-card__price {
+            width: 50px;
+            height: 16px;
+            background: #999;
+            border-radius: 2px;
+        }
+
+        /* ════════════════════════════════════════════
+           AWARDS
+           ════════════════════════════════════════════ */
+        .wf-awards {
+            padding: 60px;
+            background: #fafafa;
+        }
+
+        .wf-awards__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .wf-awards__text {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .wf-awards__badges {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .wf-award-badge {
+            width: 100%;
+            height: 100px;
+            background: #e8e8e8;
+            border-radius: 12px;
+            border: 2px dashed #d0d0d0;
+        }
+
+        /* ════════════════════════════════════════════
+           TESTIMONIALS
+           ════════════════════════════════════════════ */
+        .wf-testimonials {
+            padding: 60px;
+            background: #fff;
+            overflow: hidden;
+        }
+
+        .wf-testimonials__track {
+            display: flex;
+            gap: 24px;
+        }
+
+        .wf-testimonial {
+            min-width: 320px;
+            height: 180px;
+            border: 1.5px solid #e8e8e8;
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .wf-testimonial__stars {
+            display: flex;
+            gap: 4px;
+        }
+
+        .wf-star {
+            width: 14px;
+            height: 14px;
+            background: #ccc;
+            border-radius: 2px;
+        }
+
+        .wf-testimonial__text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .wf-testimonial__author {
+            width: 80px;
+            height: 10px;
+            background: #aaa;
+            border-radius: 2px;
+        }
+
+        /* ════════════════════════════════════════════
+           OFFICIAL STORE
+           ════════════════════════════════════════════ */
+        .wf-store {
+            padding: 60px;
+            background: #fafafa;
+            text-align: center;
+        }
+
+        .wf-store__content {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+
+        /* ════════════════════════════════════════════
+           BLOGS
+           ════════════════════════════════════════════ */
+        .wf-blogs {
+            padding: 60px;
+            background: #fff;
+        }
+
+        .wf-blogs__grid {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .wf-blog-card {
+            width: 300px;
+            height: 320px;
+            border-radius: 16px;
+            background: #e0e0e0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wf-blog-card__overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: rgba(0,0,0,0.15);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .wf-blog-card__title-line {
+            height: 12px;
+            background: rgba(255,255,255,0.4);
+            border-radius: 2px;
+        }
+
+        .wf-blog-card__title-line:last-child {
+            width: 60%;
+        }
+
+        /* ════════════════════════════════════════════
+           VERIFY CTA
+           ════════════════════════════════════════════ */
+        .wf-verify {
+            height: 200px;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .wf-verify__title {
+            width: 300px;
+            height: 24px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 4px;
+        }
+
+        .wf-verify__sub {
+            width: 400px;
+            height: 10px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 2px;
+        }
+
+        .wf-verify__btn {
+            width: 160px;
+            height: 44px;
+            background: #fff;
+            border-radius: 22px;
+        }
+
+        /* ════════════════════════════════════════════
+           WHY CHOOSE
+           ════════════════════════════════════════════ */
+        .wf-why {
+            padding: 60px;
+            background: #fff;
+        }
+
+        .wf-why__card {
+            background: #fafafa;
+            border-radius: 20px;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        /* ════════════════════════════════════════════
+           FOOTER
+           ════════════════════════════════════════════ */
+        .wf-footer {
+            background: #333;
+            padding: 50px 60px;
+        }
+
+        .wf-footer__grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+
+        .wf-footer__col {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .wf-footer__col-title {
+            width: 70px;
+            height: 12px;
+            background: rgba(255,255,255,0.4);
+            border-radius: 2px;
+        }
+
+        .wf-footer__col-item {
+            width: 90px;
+            height: 8px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 2px;
+        }
+
+        .wf-footer__col-item:nth-child(odd) { width: 70px; }
+
+        .wf-company {
+            background: #1a1a1a;
+            padding: 30px 60px;
+            text-align: center;
+        }
+
+        .wf-company__line {
+            height: 8px;
+            width: 400px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            margin: 6px auto;
+        }
+
+        /* ════════════════════════════════════════════
+           FLOATING BUTTONS
+           ════════════════════════════════════════════ */
+        .wf-floating {
+            position: relative;
+            height: 0;
+        }
+
+        .wf-fab {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #333;
+            position: absolute;
+        }
+
+        .wf-fab--left {
+            bottom: -40px;
+            left: 30px;
+        }
+
+        .wf-fab--right {
+            bottom: -40px;
+            right: 30px;
+        }
+
+        .wf-side-btns {
+            position: absolute;
+            right: 30px;
+            top: -600px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .wf-side-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #ccc;
+        }
+
+        /* ════════════════════════════════════════════
+           MOTION ARROWS / ANNOTATIONS
+           ════════════════════════════════════════════ */
+        .motion-arrow {
+            position: absolute;
+            font-size: 20px;
+            color: #ee1b2b;
+            opacity: 0.6;
+        }
+
+        .wf-label {
+            position: absolute;
+            font-size: 10px;
+            font-weight: 600;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            background: #fff;
+            padding: 3px 8px;
+            border-radius: 3px;
+            border: 1px solid #e0e0e0;
+            white-space: nowrap;
+        }
+
+        .wf-dimension {
+            position: absolute;
+            font-size: 9px;
+            font-weight: 500;
+            color: #aaa;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wireframe">
+
+    <!-- ═══ HEADER ═══ -->
+    <div class="wf-header">
+        <div class="wf-header__top">
+            <div class="wf-logo"></div>
+            <div class="wf-search"></div>
+            <div class="wf-icons">
+                <div class="wf-icon"></div>
+                <div class="wf-icon"></div>
+                <div class="wf-icon"></div>
+                <div class="wf-icon"></div>
+            </div>
+        </div>
+        <div class="wf-header__nav">
+            <div class="wf-nav-item"></div>
+            <div class="wf-nav-item"></div>
+            <div class="wf-nav-item"></div>
+            <div class="wf-nav-item"></div>
+            <div class="wf-nav-item"></div>
+            <div class="wf-nav-item"></div>
+            <div class="wf-nav-item"></div>
+            <div class="wf-nav-item"></div>
+            <div class="wf-nav-item"></div>
+        </div>
+        <span class="wf-label" style="top: 12px; left: 16px;">Sticky Header</span>
+    </div>
+
+    <!-- ═══ TRUST BAR ═══ -->
+    <div class="wf-trust-bar">
+        <div class="wf-trust-item"></div>
+        <div class="wf-trust-item"></div>
+        <div class="wf-trust-item"></div>
+        <div class="wf-trust-item"></div>
+    </div>
+
+    <!-- ═══ HERO ═══ -->
+    <div class="wf-hero" style="position: relative;">
+        <div class="wf-hero__content">
+            <div class="wf-hero__title"></div>
+            <div class="wf-hero__subtitle"></div>
+            <div class="wf-hero__subtitle" style="width: 260px;"></div>
+            <div class="wf-hero__cta"></div>
+        </div>
+        <div class="wf-hero__image-placeholder">Product Image</div>
+        <div class="wf-hero__dots">
+            <div class="wf-hero__dot wf-hero__dot--active"></div>
+            <div class="wf-hero__dot"></div>
+            <div class="wf-hero__dot"></div>
+        </div>
+        <span class="wf-label" style="top: 16px; right: 16px;">Hero Carousel · 3 slides · 5s</span>
+        <span class="motion-arrow" style="bottom: 60px; left: 50%; transform: translateX(-50%);">← → ← →</span>
+    </div>
+
+    <!-- ═══ CATEGORY CARDS ═══ -->
+    <div class="wf-section" style="padding: 50px 0; border-left: none; border-right: none; margin: 0;">
+        <span class="wf-label" style="top: 16px; right: 76px;">Horizontally Scrollable · 6 Cards</span>
+        <div class="wf-categories__grid" style="padding: 0 60px;">
+            <div class="wf-cat-card">
+                <div class="wf-cat-card__image">
+                    <div class="wf-cat-card__gradient"></div>
+                    <div class="wf-cat-card__circle"></div>
+                </div>
+                <div class="wf-cat-card__body">
+                    <div class="wf-cat-card__badge"></div>
+                    <div class="wf-cat-card__puffs"></div>
+                    <div class="wf-cat-card__sub"></div>
+                    <div class="wf-cat-card__btn"></div>
+                </div>
+            </div>
+            <div class="wf-cat-card">
+                <div class="wf-cat-card__image">
+                    <div class="wf-cat-card__gradient"></div>
+                    <div class="wf-cat-card__circle"></div>
+                </div>
+                <div class="wf-cat-card__body">
+                    <div class="wf-cat-card__badge"></div>
+                    <div class="wf-cat-card__puffs"></div>
+                    <div class="wf-cat-card__sub"></div>
+                    <div class="wf-cat-card__btn"></div>
+                </div>
+            </div>
+            <div class="wf-cat-card">
+                <div class="wf-cat-card__image">
+                    <div class="wf-cat-card__gradient"></div>
+                    <div class="wf-cat-card__circle"></div>
+                </div>
+                <div class="wf-cat-card__body">
+                    <div class="wf-cat-card__badge"></div>
+                    <div class="wf-cat-card__puffs"></div>
+                    <div class="wf-cat-card__sub"></div>
+                    <div class="wf-cat-card__btn"></div>
+                </div>
+            </div>
+            <div class="wf-cat-card">
+                <div class="wf-cat-card__image">
+                    <div class="wf-cat-card__gradient"></div>
+                    <div class="wf-cat-card__circle"></div>
+                </div>
+                <div class="wf-cat-card__body">
+                    <div class="wf-cat-card__badge"></div>
+                    <div class="wf-cat-card__puffs"></div>
+                    <div class="wf-cat-card__sub"></div>
+                    <div class="wf-cat-card__btn"></div>
+                </div>
+            </div>
+            <div class="wf-cat-card">
+                <div class="wf-cat-card__image">
+                    <div class="wf-cat-card__gradient"></div>
+                    <div class="wf-cat-card__circle"></div>
+                </div>
+                <div class="wf-cat-card__body">
+                    <div class="wf-cat-card__badge"></div>
+                    <div class="wf-cat-card__puffs"></div>
+                    <div class="wf-cat-card__sub"></div>
+                    <div class="wf-cat-card__btn"></div>
+                </div>
+            </div>
+            <div class="wf-cat-card">
+                <div class="wf-cat-card__image">
+                    <div class="wf-cat-card__gradient"></div>
+                    <div class="wf-cat-card__circle"></div>
+                </div>
+                <div class="wf-cat-card__body">
+                    <div class="wf-cat-card__badge"></div>
+                    <div class="wf-cat-card__puffs"></div>
+                    <div class="wf-cat-card__sub"></div>
+                    <div class="wf-cat-card__btn"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ LATEST PRODUCTS ═══ -->
+    <div class="wf-products">
+        <span class="wf-label" style="position: relative; float: right; margin-bottom: -24px;">Scroll-triggered Fade Up · Staggered</span>
+        <div class="wf-products__title">
+            <div class="text-line--heading" style="margin: 0 auto;"></div>
+        </div>
+        <div class="wf-products__grid">
+            <div class="wf-product-card">
+                <div class="wf-product-card__img"></div>
+                <div class="wf-product-card__name"></div>
+                <div class="wf-product-card__price"></div>
+            </div>
+            <div class="wf-product-card">
+                <div class="wf-product-card__img"></div>
+                <div class="wf-product-card__name"></div>
+                <div class="wf-product-card__price"></div>
+            </div>
+            <div class="wf-product-card">
+                <div class="wf-product-card__img"></div>
+                <div class="wf-product-card__name"></div>
+                <div class="wf-product-card__price"></div>
+            </div>
+            <div class="wf-product-card">
+                <div class="wf-product-card__img"></div>
+                <div class="wf-product-card__name"></div>
+                <div class="wf-product-card__price"></div>
+            </div>
+            <div class="wf-product-card">
+                <div class="wf-product-card__img"></div>
+                <div class="wf-product-card__name"></div>
+                <div class="wf-product-card__price"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ BEST SELLERS ═══ -->
+    <div class="wf-products wf-products--white">
+        <div class="wf-products__title">
+            <div class="text-line--heading" style="margin: 0 auto;"></div>
+        </div>
+        <div class="wf-products__grid">
+            <div class="wf-product-card">
+                <div class="wf-product-card__img"></div>
+                <div class="wf-product-card__name"></div>
+                <div class="wf-product-card__price"></div>
+            </div>
+            <div class="wf-product-card">
+                <div class="wf-product-card__img"></div>
+                <div class="wf-product-card__name"></div>
+                <div class="wf-product-card__price"></div>
+            </div>
+            <div class="wf-product-card">
+                <div class="wf-product-card__img"></div>
+                <div class="wf-product-card__name"></div>
+                <div class="wf-product-card__price"></div>
+            </div>
+            <div class="wf-product-card">
+                <div class="wf-product-card__img"></div>
+                <div class="wf-product-card__name"></div>
+                <div class="wf-product-card__price"></div>
+            </div>
+            <div class="wf-product-card">
+                <div class="wf-product-card__img"></div>
+                <div class="wf-product-card__name"></div>
+                <div class="wf-product-card__price"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ AWARDS ═══ -->
+    <div class="wf-awards" style="position: relative;">
+        <span class="wf-label" style="top: 16px; right: 16px;">Scroll-triggered · Slide In L/R</span>
+        <div class="wf-awards__grid">
+            <div class="wf-awards__text">
+                <div class="text-line--heading" style="width: 70%;"></div>
+                <div class="text-line" style="margin-top: 8px;"></div>
+                <div class="text-line text-line--medium"></div>
+                <div class="text-line text-line--short"></div>
+            </div>
+            <div class="wf-awards__badges">
+                <div class="wf-award-badge"></div>
+                <div class="wf-award-badge"></div>
+                <div class="wf-award-badge"></div>
+                <div class="wf-award-badge"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ TESTIMONIALS ═══ -->
+    <div class="wf-testimonials" style="position: relative;">
+        <span class="wf-label" style="top: 16px; right: 16px;">Infinite Marquee · 20s Loop</span>
+        <div style="text-align: center; margin-bottom: 30px;">
+            <div class="text-line--heading" style="margin: 0 auto; width: 25%;"></div>
+        </div>
+        <div class="wf-testimonials__track">
+            <div class="wf-testimonial">
+                <div class="wf-testimonial__stars">
+                    <div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div>
+                </div>
+                <div class="wf-testimonial__text">
+                    <div class="text-line text-line--full"></div>
+                    <div class="text-line text-line--medium"></div>
+                    <div class="text-line text-line--short"></div>
+                </div>
+                <div class="wf-testimonial__author"></div>
+            </div>
+            <div class="wf-testimonial">
+                <div class="wf-testimonial__stars">
+                    <div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div>
+                </div>
+                <div class="wf-testimonial__text">
+                    <div class="text-line text-line--full"></div>
+                    <div class="text-line text-line--medium"></div>
+                    <div class="text-line text-line--short"></div>
+                </div>
+                <div class="wf-testimonial__author"></div>
+            </div>
+            <div class="wf-testimonial">
+                <div class="wf-testimonial__stars">
+                    <div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div>
+                </div>
+                <div class="wf-testimonial__text">
+                    <div class="text-line text-line--full"></div>
+                    <div class="text-line text-line--medium"></div>
+                    <div class="text-line text-line--short"></div>
+                </div>
+                <div class="wf-testimonial__author"></div>
+            </div>
+            <div class="wf-testimonial" style="opacity: 0.4;">
+                <div class="wf-testimonial__stars">
+                    <div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div>
+                </div>
+                <div class="wf-testimonial__text">
+                    <div class="text-line text-line--full"></div>
+                    <div class="text-line text-line--medium"></div>
+                </div>
+                <div class="wf-testimonial__author"></div>
+            </div>
+        </div>
+        <span class="motion-arrow" style="bottom: 20px; left: 50%; transform: translateX(-50%);">← ← ← ← ←</span>
+    </div>
+
+    <!-- ═══ OFFICIAL STORE ═══ -->
+    <div class="wf-store">
+        <div class="wf-store__content">
+            <div class="text-line--heading" style="width: 60%; margin: 0 auto;"></div>
+            <div class="text-line text-line--full" style="margin-top: 8px;"></div>
+            <div class="text-line text-line--medium"></div>
+            <div class="text-line text-line--short"></div>
+        </div>
+    </div>
+
+    <!-- ═══ BLOGS ═══ -->
+    <div class="wf-blogs" style="position: relative;">
+        <span class="wf-label" style="top: 16px; right: 16px;">Hover Reveal · Slide Up Overlay</span>
+        <div style="text-align: center;">
+            <div class="text-line--heading" style="margin: 0 auto; width: 30%;"></div>
+        </div>
+        <div class="wf-blogs__grid">
+            <div class="wf-blog-card">
+                <div class="wf-blog-card__overlay">
+                    <div class="wf-blog-card__title-line"></div>
+                    <div class="wf-blog-card__title-line"></div>
+                </div>
+            </div>
+            <div class="wf-blog-card">
+                <div class="wf-blog-card__overlay">
+                    <div class="wf-blog-card__title-line"></div>
+                    <div class="wf-blog-card__title-line"></div>
+                </div>
+            </div>
+            <div class="wf-blog-card">
+                <div class="wf-blog-card__overlay">
+                    <div class="wf-blog-card__title-line"></div>
+                    <div class="wf-blog-card__title-line"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ VERIFY ═══ -->
+    <div class="wf-verify">
+        <div class="wf-verify__title"></div>
+        <div class="wf-verify__sub"></div>
+        <div class="wf-verify__btn"></div>
+        <span class="wf-label" style="position: absolute; top: 16px; right: 76px; background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.5);">Full-width CTA Band</span>
+    </div>
+
+    <!-- ═══ WHY CHOOSE ═══ -->
+    <div class="wf-why">
+        <div class="wf-why__card">
+            <div class="text-line--heading" style="width: 30%;"></div>
+            <div class="text-line text-line--full" style="margin-top: 8px;"></div>
+            <div class="text-line text-line--full"></div>
+            <div class="text-line text-line--medium"></div>
+            <div class="text-line text-line--short"></div>
+        </div>
+    </div>
+
+    <!-- ═══ FOOTER ═══ -->
+    <div class="wf-footer">
+        <div class="wf-footer__grid">
+            <div class="wf-footer__col">
+                <div class="wf-footer__col-title"></div>
+                <div class="wf-footer__col-item"></div>
+                <div class="wf-footer__col-item"></div>
+                <div class="wf-footer__col-item"></div>
+                <div class="wf-footer__col-item"></div>
+            </div>
+            <div class="wf-footer__col">
+                <div class="wf-footer__col-title"></div>
+                <div class="wf-footer__col-item"></div>
+                <div class="wf-footer__col-item"></div>
+                <div class="wf-footer__col-item"></div>
+                <div class="wf-footer__col-item"></div>
+            </div>
+            <div class="wf-footer__col">
+                <div class="wf-footer__col-title"></div>
+                <div class="wf-footer__col-item"></div>
+                <div class="wf-footer__col-item"></div>
+                <div class="wf-footer__col-item"></div>
+                <div class="wf-footer__col-item"></div>
+            </div>
+            <div class="wf-footer__col">
+                <div class="wf-footer__col-title"></div>
+                <div class="wf-footer__col-item"></div>
+                <div class="wf-footer__col-item"></div>
+                <div class="wf-footer__col-item"></div>
+                <div class="wf-footer__col-item"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wf-company">
+        <div class="wf-company__line"></div>
+        <div class="wf-company__line" style="width: 300px;"></div>
+    </div>
+
+</div>
+
+</body>
+</html>

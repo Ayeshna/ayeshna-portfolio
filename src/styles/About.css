@@ -1,0 +1,971 @@
+/* ==========================================================================
+   About — Dark Glass Bento Grid
+   #08090C bg  ·  #00FF41 accent  ·  Heavitas + Lato
+   Row 1:  A(6) + B(3) + C(3)  = 12
+   Row 2:  D(8) + F(4)         = 12   (height-matched)
+   Row 3:  E × 3               = 12
+   ========================================================================== */
+
+/* ---------- Section shell ---------- */
+.about {
+  position: relative;
+  z-index: 1;
+  padding: 6rem 0 4rem;
+}
+
+.about__container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .about__container {
+    padding: 0 2.5rem;
+  }
+}
+
+/* ==========================================================================
+   BentoCard — outer wrapper (transparent to layout, anchors plus marks)
+   ========================================================================== */
+.bento-card-wrap {
+  position: relative;   /* plus marks position relative to this */
+  display: flex;
+  flex-direction: column;
+}
+
+/* card fills the wrapper (critical for row-2 stretch alignment) */
+.bento-card-wrap > .bento-card {
+  flex: 1;
+}
+
+/* ==========================================================================
+   Four-corner editorial plus marks  (shared by bento + portrait wrap)
+   ========================================================================== */
+.bento-plus {
+  position: absolute;
+  color: var(--accent);
+  opacity: 0.35;
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.bento-plus--tl { top: -10px;  left: -10px;  }
+.bento-plus--tr { top: -10px;  right: -10px; }
+.bento-plus--bl { bottom: -10px; left: -10px;  }
+.bento-plus--br { bottom: -10px; right: -10px; }
+
+/* ==========================================================================
+   BentoCard — Dark glass base
+   ========================================================================== */
+.bento-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #08090C;
+  padding: 1.5rem;
+  font-family: 'Lato', sans-serif;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    0 0 0 0.5px rgba(255, 255, 255, 0.04);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bento-card:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    0 0 0 0.5px rgba(255, 255, 255, 0.06),
+    0 0 40px rgba(0, 255, 65, 0.06);
+}
+
+.bento-card__sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    transparent 45%
+  );
+  z-index: 3;
+}
+
+/* ── Intense bottom green radial glow ── */
+.bento-card__glow {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(
+      ellipse 70% 55% at 50% 100%,
+      rgba(0, 255, 65, 0.18) 0%,
+      rgba(0, 255, 65, 0.10) 25%,
+      rgba(0, 255, 65, 0.04) 50%,
+      transparent 75%
+    );
+}
+
+.bento-card--glow {
+  border-color: rgba(0, 255, 65, 0.12);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    0 6px 30px rgba(0, 255, 65, 0.07),
+    0 0 0 0.5px rgba(0, 255, 65, 0.08);
+}
+
+.bento-card--glow:hover {
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    0 8px 50px rgba(0, 255, 65, 0.12),
+    0 0 0 0.5px rgba(0, 255, 65, 0.12);
+}
+
+/* ==========================================================================
+   Shared atoms
+   ========================================================================== */
+.about-icon {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.about-micro-label {
+  margin: 0;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 500;
+}
+
+.about-label-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.about-card-heading {
+  margin: 0;
+  font-family: 'Heavitas', sans-serif;
+  font-weight: 400;
+  font-size: 1.75rem;
+  color: var(--white);
+  line-height: 1.1;
+}
+
+.about-card-sub {
+  margin: 0.35rem 0 0;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ==========================================================================
+   Mobile summary block — only visible <768 px (Timeline card)
+   ========================================================================== */
+.about-timeline__mobile { display: none; }
+
+/* ==========================================================================
+   About grid — single named-area grid for all 8 cards
+   ========================================================================== */
+.about__grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+/* ─────────── MOBILE (default) ───────────
+   Layout:
+     ┌─────────── portrait ───────────┐
+     ┌──────────── origin ────────────┐
+     ┌ stats ┬ timeline ┬ creative   ┐    (3-col compact row)
+     ┌ adobe ┬  3d-tool ┬   ai-tool  ┐    (3-col compact row)
+*/
+.about__grid {
+  grid-template-areas:
+    "portrait portrait portrait"
+    "origin   origin   origin"
+    "stats    timeline creative"
+    "adobe    threed   ai";
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.bc-portrait { grid-area: portrait; }
+.bc-origin   { grid-area: origin;   }
+.bc-stats    { grid-area: stats;    }
+.bc-timeline { grid-area: timeline; }
+.bc-creative { grid-area: creative; }
+.bc-adobe    { grid-area: adobe;    }
+.bc-3d       { grid-area: threed;   }
+.bc-ai       { grid-area: ai;       }
+
+/* ─────────── DESKTOP — original 3-row layout ─────────── */
+@media (min-width: 768px) {
+  .about__grid {
+    gap: 1rem;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-areas:
+      "portrait portrait portrait portrait portrait portrait origin   origin   origin   stats    stats    stats"
+      "timeline timeline timeline timeline timeline timeline timeline timeline creative creative creative creative"
+      "adobe    adobe    adobe    adobe    threed   threed   threed   threed   ai       ai       ai       ai";
+    align-items: stretch;
+  }
+}
+
+/* ==========================================================================
+   Card [A] — Portrait with 3D tilt
+   ========================================================================== */
+.about-portrait-wrap {
+  position: relative;   /* anchors the four bento-plus marks */
+  perspective: 800px;
+}
+
+.about-portrait {
+  position: relative;
+  min-height: 320px;
+  height: 100%;
+  padding: 0;
+  cursor: default;
+  transform-style: preserve-3d;
+}
+
+.about-portrait__bg {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  background-color: #0e1018;
+  background-image:
+    radial-gradient(
+      ellipse 80% 60% at 50% 100%,
+      rgba(0, 255, 65, 0.12) 0%,
+      rgba(0, 255, 65, 0.04) 40%,
+      transparent 70%
+    );
+  z-index: 0;
+  /* Replace with: background-image: url('/assets/portrait.jpg'); background-size: cover; */
+}
+
+.about-portrait__glare {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+.about-portrait__info {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 1.25rem;
+  right: 1.25rem;
+  z-index: 3;
+  padding: 1rem 1.25rem;
+  border-radius: 16px;
+  background: rgba(8, 9, 12, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.about-portrait__name {
+  margin: 0;
+  font-family: 'Heavitas', sans-serif;
+  font-weight: 400;
+  font-size: 1.1rem;
+  color: var(--white);
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+.about-portrait__role {
+  margin: 0.25rem 0 0;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-size: 0.75rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ==========================================================================
+   Card [B] — Origin (education journey)
+   ========================================================================== */
+.about-origin {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-origin__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.about-origin__step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: border-color 0.2s ease;
+}
+
+.about-origin__step:hover {
+  border-color: rgba(0, 255, 65, 0.12);
+}
+
+.about-origin__step .about-icon {
+  margin-top: 2px;
+}
+
+.about-origin__school {
+  margin: 0;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--white);
+}
+
+.about-origin__degree {
+  margin: 0;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.about-origin__year {
+  margin: 0.1rem 0 0;
+  font-family: monospace;
+  font-size: 9px;
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+/* ==========================================================================
+   Card [C] — Stats with bar chart
+   ========================================================================== */
+.about-stats {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-stats__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.about-stats__value {
+  font-family: 'Heavitas', sans-serif;
+  font-weight: 400;
+  font-size: 2rem;
+  color: var(--white);
+  line-height: 1;
+}
+
+.about-stats__postfix {
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.about-stats__desc {
+  margin: 0 0 1rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.4;
+}
+
+/* ── Weaving paths infographic ── */
+.about-weave {
+  position: relative;
+  flex: 1;
+  min-height: 100px;
+  margin-top: 0.25rem;
+  overflow: hidden;
+  /* Bleed left to reach the card edge (cancel out parent padding) */
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  padding-right: 1.5rem;
+}
+
+.about-weave__svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+/* Discipline tags — left edge */
+.about-weave__tag {
+  position: absolute;
+  left: 0;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px 3px 6px;
+  border-radius: 6px;
+  background: rgba(8, 9, 12, 0.8);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  z-index: 2;
+}
+
+.about-weave__tag-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.about-weave__tag-text {
+  font-family: 'Lato', sans-serif;
+  font-size: 8px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+/* Convergence label — right edge */
+.about-weave__converge {
+  position: absolute;
+  right: 1.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  padding: 3px 10px;
+  border-radius: 6px;
+  background: rgba(0, 255, 65, 0.08);
+  border: 1px solid rgba(0, 255, 65, 0.2);
+}
+
+.about-weave__converge-text {
+  font-family: 'Heavitas', sans-serif;
+  font-weight: 400;
+  font-size: 9px;
+  color: var(--accent);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   Card [D] — Professional Evolution  (Wavy S-curve, triple bloom)
+   ========================================================================== */
+.about-timeline-v2 {
+  display: flex;
+  flex-direction: column;
+  /* Minimal top/bottom padding; NO horizontal padding so wave bleeds edge-to-edge */
+  padding: 1.25rem 0 0.75rem;
+}
+
+/* Label row needs its own side padding since the card has none */
+.about-timeline-v2 .about-label-row {
+  padding: 0 1.5rem;
+}
+
+/* ── Wave container — SVG + absolutely-positioned nodes ── */
+.about-wave {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 240px;
+  margin-top: 0.15rem;
+  /* Allow SVG to bleed past card edges for seamless continuity */
+  overflow: hidden;
+}
+
+/* SVG stretches full container */
+.about-wave__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* ── Floating node wrapper (pod + label) ── */
+.about-wave__node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── Glass pod — circular with backdrop blur ── */
+.about-wave__pod {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  background: rgba(8, 9, 12, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(0, 255, 65, 0.2);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.5),
+    0 0 14px rgba(0, 255, 65, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  position: relative;
+  z-index: 3;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: default;
+}
+
+.about-wave__pod:hover {
+  border-color: rgba(0, 255, 65, 0.45);
+  transform: scale(1.1);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.5),
+    0 0 24px rgba(0, 255, 65, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Active pod — Present node: brighter border + green fill */
+.about-wave__pod--active {
+  border-color: var(--accent);
+  background: rgba(0, 255, 65, 0.12);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.5),
+    0 0 28px rgba(0, 255, 65, 0.3),
+    0 0 60px rgba(0, 255, 65, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* ── Triple pulse rings for "Present" node ── */
+.about-wave__pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 42px;
+  height: 42px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  z-index: 1;
+  pointer-events: none;
+  animation: wave-pulse 3s ease-out infinite;
+}
+
+.about-wave__pulse--d2 {
+  animation-delay: 1s;
+}
+
+.about-wave__pulse--d3 {
+  animation-delay: 2s;
+}
+
+@keyframes wave-pulse {
+  0% {
+    opacity: 0.6;
+    width: 42px;
+    height: 42px;
+  }
+  100% {
+    opacity: 0;
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/* ── Text labels — alternate above / below the wave ── */
+.about-wave__label {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.about-wave__label--above {
+  bottom: calc(100% + 12px);
+}
+
+.about-wave__label--below {
+  top: calc(100% + 12px);
+}
+
+.about-wave__year {
+  display: block;
+  font-family: monospace;
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.about-wave__year--active {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 10px;
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.4);
+}
+
+.about-wave__title {
+  margin: 0;
+  font-family: 'Heavitas', sans-serif;
+  font-weight: 400;
+  font-size: 0.7rem;
+  color: var(--white);
+  line-height: 1.25;
+}
+
+.about-wave__desc {
+  margin: 2px 0 0;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.25;
+}
+
+/* ── Mobile: horizontal scroll ── */
+@media (max-width: 767px) {
+  .about-wave {
+    min-height: 220px;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .about-wave__svg {
+    min-width: 750px;
+  }
+}
+
+/* ==========================================================================
+   Card [F] — Secret / Creative Fuel
+   Height matches Card D via align-items: stretch on parent
+   ========================================================================== */
+.about-secret {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 1.5rem;
+}
+
+.about-secret__heading {
+  margin: 0;
+  font-family: 'Heavitas', sans-serif;
+  font-weight: 400;
+  font-size: 1.25rem;
+  color: var(--white);
+}
+
+.about-secret__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+  justify-content: center;
+  margin-top: 0.75rem;
+}
+
+.about-secret__item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  background-color: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.about-secret__item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(0, 255, 65, 0.12);
+  transform: translateX(4px);
+}
+
+.about-secret__item-icon {
+  color: var(--accent);
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: rgba(0, 255, 65, 0.06);
+}
+
+.about-secret__item-name {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--white);
+}
+
+.about-secret__item-detail {
+  margin: 0;
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* ==========================================================================
+   Section [E] — Tool groups (Row 3)
+   ========================================================================== */
+.about-tools__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.about-tools__title {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.about-tools__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.about-tools__skill-meta {
+  display: flex;
+  justify-content: space-between;
+  font-family: monospace;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 0.25rem;
+}
+
+.about-tools__bar {
+  height: 4px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.04);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.about-tools__bar-fill {
+  height: 100%;
+  background-color: var(--accent);
+  border-radius: 999px;
+  box-shadow: 0 0 6px rgba(0, 255, 65, 0.25);
+}
+
+/* ==========================================================================
+   ███████  MOBILE OVERRIDES  ███████
+   Stats + Timeline + Creative + Adobe + 3D + AI all run 3-per-row at 375px,
+   which means ~108 px per card. Aggressive content trimming below.
+   ========================================================================== */
+@media (max-width: 767px) {
+
+  /* ── Reduce section padding — tighten gap between Work and About ── */
+  .about { padding: 2.5rem 0 2rem; }
+
+  /* ── Container padding generous enough to fit the outside + corner marks ── */
+  .about__container { padding: 0 1.25rem; }
+  .about__grid      { gap: 0.45rem; }
+
+  /* CRITICAL: force grid tracks to honour the column width.
+     Without min-width: 0, content min-content pushes items past the viewport. */
+  .about__grid > .bento-card-wrap {
+    min-width: 0;
+  }
+  .about__grid > .bento-card-wrap > .bento-card {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  /* Pull plus marks slightly inward on mobile so they never clip the viewport */
+  .about__grid .bento-plus--tl { top: -7px;    left: -7px;   }
+  .about__grid .bento-plus--tr { top: -7px;    right: -7px;  }
+  .about__grid .bento-plus--bl { bottom: -7px; left: -7px;   }
+  .about__grid .bento-plus--br { bottom: -7px; right: -7px;  }
+
+  /* ── Card base: tighter padding ── */
+  .about__grid .bento-card {
+    padding: 0.9rem 0.75rem;
+  }
+
+  /* ── Portrait — keep tall ── */
+  .about-portrait {
+    min-height: 260px;
+  }
+
+  /* ── Origin — keep readable, compress steps ── */
+  .about-origin__step { padding: 0.5rem 0.6rem; }
+  .about-origin__school { font-size: 0.75rem; }
+  .about-origin__degree { font-size: 0.65rem; }
+
+  /* ─────────── Stats card (Experience) ─────────── */
+  .bc-stats .about-card-heading,
+  .bc-stats .about-card-sub,
+  .bc-stats .about-weave {
+    display: none;             /* hide noisy weaving paths + extra copy */
+  }
+  .bc-stats .about-stats__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+    margin: 0;
+  }
+  .bc-stats .about-stats__value { font-size: 1.6rem; }
+  .bc-stats .about-stats__postfix { font-size: 0.65rem; }
+  .bc-stats .about-stats__desc {
+    font-size: 0.6rem;
+    margin: 0.5rem 0 0;
+    line-height: 1.3;
+  }
+  .bc-stats .about-micro-label { font-size: 8px; letter-spacing: 1px; }
+
+  /* ─────────── Timeline card (Professional Evolution) ─────────── */
+  .bc-timeline {
+    /* override the edge-bleed padding from desktop */
+    --_p: 0;
+  }
+  .about-timeline-v2 {
+    padding: 0.9rem 0.75rem !important;  /* normal padding on mobile */
+  }
+  .about-timeline-v2 .about-label-row {
+    padding: 0 !important;
+    margin-bottom: 0.5rem;
+  }
+  /* Hide the wave SVG entirely — not viable at 108 px wide
+     Show the mobile summary content (added via JSX) instead. */
+  .bc-timeline .about-wave { display: none; }
+  .bc-timeline .about-micro-label { font-size: 8px; letter-spacing: 1px; }
+
+  /* Mobile-only summary block inside Timeline card */
+  .about-timeline__mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    margin-top: 0.5rem;
+  }
+  .about-timeline__mobile-num {
+    font-family: 'Heavitas', sans-serif;
+    font-size: 1.6rem;
+    color: var(--white);
+    line-height: 1;
+  }
+  .about-timeline__mobile-label {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.3;
+  }
+
+  /* ─────────── Creative Fuel card ─────────── */
+  .bc-creative .about-secret { padding: 0.85rem 0.55rem; }
+  .bc-creative .about-micro-label { font-size: 8px; letter-spacing: 1px; }
+  .bc-creative .about-secret__heading { font-size: 0.8rem; line-height: 1.1; }
+  .bc-creative .about-secret__list {
+    gap: 0.35rem;
+    margin-top: 0.45rem;
+    min-width: 0;
+  }
+  .bc-creative .about-secret__item {
+    padding: 0.35rem 0.4rem;
+    gap: 0.35rem;
+    border-radius: 6px;
+    min-width: 0;
+    overflow: hidden;
+  }
+  .bc-creative .about-secret__item-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    flex-shrink: 0;
+  }
+  .bc-creative .about-secret__item-icon svg {
+    width: 12px;
+    height: 12px;
+  }
+  .bc-creative .about-secret__item-name {
+    font-size: 0.65rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .bc-creative .about-secret__item-detail { display: none; }
+
+  /* ─────────── Tool cards (Adobe / 3D / AI) ─────────── */
+  .bc-adobe .bento-card,
+  .bc-3d .bento-card,
+  .bc-ai .bento-card {
+    padding: 0.85rem 0.6rem;
+  }
+  .bc-adobe .about-tools__header,
+  .bc-3d .about-tools__header,
+  .bc-ai .about-tools__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+    margin-bottom: 0.6rem;
+  }
+  .bc-adobe .about-tools__title,
+  .bc-3d .about-tools__title,
+  .bc-ai .about-tools__title {
+    font-size: 0.6rem;
+    letter-spacing: 0.5px;
+  }
+  .bc-adobe .about-tools__list,
+  .bc-3d .about-tools__list,
+  .bc-ai .about-tools__list {
+    gap: 0.45rem;
+  }
+  .bc-adobe .about-tools__skill-meta,
+  .bc-3d .about-tools__skill-meta,
+  .bc-ai .about-tools__skill-meta {
+    font-size: 8px;
+    margin-bottom: 0.15rem;
+  }
+  .bc-adobe .about-tools__bar,
+  .bc-3d .about-tools__bar,
+  .bc-ai .about-tools__bar {
+    height: 3px;
+  }
+  /* Truncate long skill names that overflow the narrow card */
+  .bc-adobe .about-tools__skill-meta span:first-child,
+  .bc-3d .about-tools__skill-meta span:first-child,
+  .bc-ai .about-tools__skill-meta span:first-child {
+    max-width: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+

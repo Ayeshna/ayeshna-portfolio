@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IVG Homepage — Portfolio Case Study</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .page {
+            width: 1440px;
+            margin: 0 auto;
+            background: #0a0a0a;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        /* ── Shared ── */
+        .section { padding: 100px 120px; }
+        .section--tight { padding: 80px 120px; }
+        .section--flush { padding: 0; }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: #ee1b2b;
+            margin-bottom: 16px;
+        }
+
+        .section-heading {
+            font-size: 42px;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .section-subtext {
+            font-size: 16px;
+            font-weight: 300;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.8;
+            max-width: 600px;
+        }
+
+        .divider {
+            height: 1px;
+            background: rgba(255,255,255,0.06);
+            margin: 0 120px;
+        }
+
+        .red-divider {
+            width: 60px;
+            height: 3px;
+            background: #ee1b2b;
+            margin-bottom: 30px;
+        }
+
+        /* ═══════════════════════════════════════════════
+           01 — PROJECT HEADER
+           ═══════════════════════════════════════════════ */
+        .project-header {
+            padding: 120px 120px 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(238,27,43,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .project-header__eyebrow {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: #ee1b2b;
+            margin-bottom: 24px;
+        }
+
+        .project-header__title {
+            font-size: 64px;
+            font-weight: 900;
+            color: #ffffff;
+            line-height: 1.1;
+            margin-bottom: 30px;
+        }
+
+        .project-header__title span {
+            color: #ee1b2b;
+        }
+
+        .project-header__desc {
+            font-size: 18px;
+            font-weight: 300;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.8;
+            max-width: 700px;
+            margin-bottom: 50px;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 80px;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .meta-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(255,255,255,0.3);
+        }
+
+        .meta-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        /* ═══════════════════════════════════════════════
+           02 — WIREFRAME SECTION
+           ═══════════════════════════════════════════════ */
+        .wireframe-section {
+            padding: 100px 120px;
+            background: #0f0f0f;
+        }
+
+        .wireframe-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-top: 50px;
+        }
+
+        .wireframe-grid img {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .wireframe-grid .wf-wide {
+            grid-column: span 2;
+        }
+
+        .wireframe-grid .wf-full {
+            grid-column: span 3;
+        }
+
+        /* ═══════════════════════════════════════════════
+           03 — SIDE BY SIDE
+           ═══════════════════════════════════════════════ */
+        .sidebyside-section {
+            padding: 100px 120px;
+        }
+
+        .comparison {
+            margin-top: 60px;
+        }
+
+        .comparison + .comparison {
+            margin-top: 80px;
+        }
+
+        .comparison__label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: #ee1b2b;
+            margin-bottom: 24px;
+        }
+
+        .comparison__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .comparison__card {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .comparison__card img {
+            width: 100%;
+            display: block;
+        }
+
+        .comparison__badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        .comparison__badge--wire {
+            background: rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+            backdrop-filter: blur(10px);
+        }
+
+        .comparison__badge--final {
+            background: rgba(238,27,43,0.9);
+            color: #ffffff;
+        }
+
+        .comparison__arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 50%;
+            right: -18px;
+            transform: translateY(-50%);
+            width: 36px;
+            height: 36px;
+            background: #ee1b2b;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        /* ═══════════════════════════════════════════════
+           04 — SECTION DEEP DIVES
+           ═══════════════════════════════════════════════ */
+        .deepdive-section {
+            padding: 100px 120px;
+            background: #0f0f0f;
+        }
+
+        .deepdive {
+            margin-top: 60px;
+        }
+
+        .deepdive + .deepdive {
+            margin-top: 80px;
+        }
+
+        .deepdive__row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .deepdive__row--reverse {
+            direction: rtl;
+        }
+
+        .deepdive__row--reverse > * {
+            direction: ltr;
+        }
+
+        .deepdive__image {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .deepdive__image img {
+            width: 100%;
+        }
+
+        .deepdive__text {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .deepdive__number {
+            font-size: 72px;
+            font-weight: 900;
+            color: rgba(238,27,43,0.15);
+            line-height: 1;
+        }
+
+        .deepdive__title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .deepdive__desc {
+            font-size: 15px;
+            font-weight: 300;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.8;
+        }
+
+        .deepdive__tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 4px;
+        }
+
+        .deepdive__tag {
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: 1px solid rgba(238,27,43,0.3);
+            color: #ee1b2b;
+        }
+
+        /* ═══════════════════════════════════════════════
+           05 — ANIMATION CALLOUTS
+           ═══════════════════════════════════════════════ */
+        .animation-section {
+            padding: 100px 120px;
+        }
+
+        .animation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 50px;
+        }
+
+        .anim-card {
+            background: #141414;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.06);
+            overflow: hidden;
+        }
+
+        .anim-card__visual {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .anim-card__visual--hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        .anim-card__visual--scroll {
+            background: linear-gradient(135deg, #1a0a0a 0%, #2d1515 100%);
+        }
+
+        .anim-card__visual--marquee {
+            background: linear-gradient(135deg, #0a1a0a 0%, #152d15 100%);
+        }
+
+        .anim-card__visual--hover {
+            background: linear-gradient(135deg, #1a1a0a 0%, #2d2d15 100%);
+        }
+
+        .anim-card__icon {
+            font-size: 48px;
+            opacity: 0.5;
+        }
+
+        .anim-card__motion-label {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            padding: 4px 12px;
+            background: rgba(238,27,43,0.15);
+            border: 1px solid rgba(238,27,43,0.3);
+            border-radius: 4px;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #ee1b2b;
+        }
+
+        .anim-card__body {
+            padding: 24px;
+        }
+
+        .anim-card__title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .anim-card__desc {
+            font-size: 13px;
+            font-weight: 300;
+            color: rgba(255,255,255,0.4);
+            line-height: 1.6;
+        }
+
+        .anim-card__specs {
+            display: flex;
+            gap: 20px;
+            margin-top: 14px;
+        }
+
+        .anim-spec {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.25);
+        }
+
+        .anim-spec span {
+            color: #ee1b2b;
+        }
+
+        /* ═══════════════════════════════════════════════
+           06 — COLOR & TYPE SYSTEM
+           ═══════════════════════════════════════════════ */
+        .system-section {
+            padding: 100px 120px;
+            background: #0f0f0f;
+        }
+
+        .system-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-top: 50px;
+        }
+
+        /* Colors */
+        .color-group-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(255,255,255,0.3);
+            margin-bottom: 16px;
+        }
+
+        .color-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .color-swatch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .color-swatch__circle {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.08);
+        }
+
+        .color-swatch__circle--large {
+            width: 80px;
+            height: 80px;
+        }
+
+        .color-swatch__label {
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.35);
+        }
+
+        .color-swatch__hex {
+            font-size: 10px;
+            font-weight: 500;
+            font-family: monospace;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .gradient-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .gradient-swatch {
+            flex: 1;
+            height: 48px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .gradient-swatch__label {
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            font-size: 9px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.25);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Typography */
+        .type-samples {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .type-sample {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .type-sample__weight {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(255,255,255,0.25);
+        }
+
+        .type-sample__preview {
+            color: #ffffff;
+            line-height: 1.2;
+        }
+
+        .type-sample__preview--800 {
+            font-size: 48px;
+            font-weight: 800;
+        }
+
+        .type-sample__preview--700 {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .type-sample__preview--600 {
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .type-sample__preview--400 {
+            font-size: 16px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .type-sample__preview--300 {
+            font-size: 14px;
+            font-weight: 300;
+            color: rgba(255,255,255,0.35);
+        }
+
+        .type-family {
+            margin-top: 20px;
+            padding: 16px 20px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .type-family__name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .type-family__source {
+            font-size: 11px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.3);
+        }
+
+        /* ═══════════════════════════════════════════════
+           07 — FULL HOMEPAGE SCROLL
+           ═══════════════════════════════════════════════ */
+        .fullscroll-section {
+            padding: 100px 120px;
+        }
+
+        .fullscroll-frame {
+            margin-top: 50px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.06);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .fullscroll-frame__browser-bar {
+            height: 40px;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            gap: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .browser-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .browser-dot--red { background: #ff5f57; }
+        .browser-dot--yellow { background: #febc2e; }
+        .browser-dot--green { background: #28c840; }
+
+        .browser-url {
+            margin-left: 16px;
+            padding: 5px 16px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.35);
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .fullscroll-frame img {
+            width: 100%;
+            display: block;
+        }
+
+        /* ═══════════════════════════════════════════════
+           08 — CLOSING
+           ═══════════════════════════════════════════════ */
+        .closing-section {
+            padding: 80px 120px;
+            text-align: center;
+            background: linear-gradient(180deg, #0a0a0a 0%, #0f0f0f 100%);
+        }
+
+        .closing-logo {
+            font-size: 48px;
+            font-weight: 900;
+            color: #ee1b2b;
+            margin-bottom: 16px;
+        }
+
+        .closing-text {
+            font-size: 14px;
+            font-weight: 300;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 0.1em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+
+    <!-- ═══════════════════════════════════════════════
+         01 — PROJECT HEADER
+         ═══════════════════════════════════════════════ -->
+    <section class="project-header">
+        <div class="project-header__eyebrow">Case Study</div>
+        <h1 class="project-header__title">IVG Homepage<br><span>Redesign</span></h1>
+        <p class="project-header__desc">A complete UI redesign of IVG's flagship e-commerce homepage — bringing award-winning vape products to life through bold visuals, intuitive navigation, and purposeful motion design.</p>
+        <div class="project-meta">
+            <div class="meta-item">
+                <span class="meta-label">Role</span>
+                <span class="meta-value">UI Design</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Tools</span>
+                <span class="meta-value">Figma</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Type</span>
+                <span class="meta-value">E-Commerce Homepage</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Year</span>
+                <span class="meta-value">2025</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══════════════════════════════════════════════
+         02 — WIREFRAME
+         ═══════════════════════════════════════════════ -->
+    <section class="wireframe-section">
+        <div class="section-label">01 — Structure</div>
+        <h2 class="section-heading">Wireframe</h2>
+        <p class="section-subtext">Before any colour or imagery, the page was mapped structurally — establishing hierarchy, scroll rhythm, and content density across 14 distinct sections.</p>
+
+        <div class="wireframe-grid">
+            <img src="./wf-01-header-hero.png" alt="Wireframe: Header and Hero" class="wf-full">
+            <img src="./wf-02-categories.png" alt="Wireframe: Category Cards">
+            <img src="./wf-03-latest- products.png" alt="Wireframe: Latest Products">
+            <img src="./wf-04-best-sellers.png" alt="Wireframe: Best Sellers">
+            <img src="./wf-05-testimonials.png" alt="Wireframe: Testimonials">
+            <img src="./wf-06-awards.png" alt="Wireframe: Awards">
+            <img src="./wf-07-verify-why.png" alt="Wireframe: Verify and Why">
+            <img src="./wf-08-blogs.png" alt="Wireframe: Blogs" class="wf-wide">
+            <img src="./wf-09-newsletter-footer.png" alt="Wireframe: Newsletter and Footer">
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══════════════════════════════════════════════
+         03 — SIDE BY SIDE
+         ═══════════════════════════════════════════════ -->
+    <section class="sidebyside-section">
+        <div class="section-label">02 — Transformation</div>
+        <h2 class="section-heading">Wireframe to Final</h2>
+        <p class="section-subtext">From greyscale structure to full-colour design — each section was refined with brand identity, product photography, and micro-interactions in mind.</p>
+
+        <!-- Hero -->
+        <div class="comparison">
+            <div class="comparison__label">Hero Banner</div>
+            <div class="comparison__grid">
+                <div class="comparison__card">
+                    <span class="comparison__badge comparison__badge--wire">Wireframe</span>
+                    <img src="./wf-01-header-hero.png" alt="Wireframe: Hero">
+                    <div class="comparison__arrow">→</div>
+                </div>
+                <div class="comparison__card">
+                    <span class="comparison__badge comparison__badge--final">Final</span>
+                    <img src="./hero-crop.png" alt="Final: Hero">
+                </div>
+            </div>
+        </div>
+
+        <!-- Categories -->
+        <div class="comparison">
+            <div class="comparison__label">Product Categories</div>
+            <div class="comparison__grid">
+                <div class="comparison__card">
+                    <span class="comparison__badge comparison__badge--wire">Wireframe</span>
+                    <img src="./wf-02-categories.png" alt="Wireframe: Categories">
+                    <div class="comparison__arrow">→</div>
+                </div>
+                <div class="comparison__card">
+                    <span class="comparison__badge comparison__badge--final">Final</span>
+                    <img src="./categories-crop.png" alt="Final: Categories">
+                </div>
+            </div>
+        </div>
+
+        <!-- Products -->
+        <div class="comparison">
+            <div class="comparison__label">Product Grid</div>
+            <div class="comparison__grid">
+                <div class="comparison__card">
+                    <span class="comparison__badge comparison__badge--wire">Wireframe</span>
+                    <img src="./wf-03-latest- products.png" alt="Wireframe: Products">
+                    <div class="comparison__arrow">→</div>
+                </div>
+                <div class="comparison__card">
+                    <span class="comparison__badge comparison__badge--final">Final</span>
+                    <img src="./products-crop.png" alt="Final: Products">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══════════════════════════════════════════════
+         04 — SECTION DEEP DIVES
+         ═══════════════════════════════════════════════ -->
+    <section class="deepdive-section">
+        <div class="section-label">03 — Closer Look</div>
+        <h2 class="section-heading">Section Deep Dives</h2>
+        <p class="section-subtext">Key areas of the homepage explored in detail — the design decisions, interaction patterns, and visual language behind each component.</p>
+
+        <!-- Hero -->
+        <div class="deepdive">
+            <div class="deepdive__row">
+                <div class="deepdive__image">
+                    <img src="./hero-crop.png" alt="Hero Banner">
+                </div>
+                <div class="deepdive__text">
+                    <div class="deepdive__number">01</div>
+                    <div class="deepdive__title">Hero Carousel</div>
+                    <div class="deepdive__desc">A full-width rotating banner showcasing IVG's flagship products. Three slides auto-rotate on a 5-second interval with opacity crossfade transitions, creating smooth visual storytelling without user friction.</div>
+                    <div class="deepdive__tags">
+                        <span class="deepdive__tag">3 Slides</span>
+                        <span class="deepdive__tag">5s Auto-Rotate</span>
+                        <span class="deepdive__tag">Crossfade</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categories -->
+        <div class="deepdive">
+            <div class="deepdive__row deepdive__row--reverse">
+                <div class="deepdive__image">
+                    <img src="./categories-crop.png" alt="Product Categories">
+                </div>
+                <div class="deepdive__text">
+                    <div class="deepdive__number">02</div>
+                    <div class="deepdive__title">Product Category Cards</div>
+                    <div class="deepdive__desc">Six colour-coded product lines, each with a unique gradient identity — from IVG Pro's purple to E-Liquid's green. The horizontal scroll pattern invites exploration while the lift animation on hover signals interactivity.</div>
+                    <div class="deepdive__tags">
+                        <span class="deepdive__tag">6 Categories</span>
+                        <span class="deepdive__tag">Gradient Coded</span>
+                        <span class="deepdive__tag">Hover Lift</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="deepdive">
+            <div class="deepdive__row">
+                <div class="deepdive__image">
+                    <img src="./testimonials-crop.png" alt="Testimonials">
+                </div>
+                <div class="deepdive__text">
+                    <div class="deepdive__number">03</div>
+                    <div class="deepdive__title">Testimonial Marquee</div>
+                    <div class="deepdive__desc">An infinite horizontal scroll of customer reviews creates ambient social proof. The continuous motion draws the eye without demanding attention — the duplicated cards ensure a seamless loop with no visible seam.</div>
+                    <div class="deepdive__tags">
+                        <span class="deepdive__tag">Infinite Loop</span>
+                        <span class="deepdive__tag">20s Cycle</span>
+                        <span class="deepdive__tag">CSS Keyframes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Awards -->
+        <div class="deepdive">
+            <div class="deepdive__row deepdive__row--reverse">
+                <div class="deepdive__image">
+                    <img src="./awards-crop.png" alt="Awards Section">
+                </div>
+                <div class="deepdive__text">
+                    <div class="deepdive__number">04</div>
+                    <div class="deepdive__title">Award-Winning Credibility</div>
+                    <div class="deepdive__desc">A two-column layout pairs brand narrative with visual proof — award badges and retail partner logos build trust through association. The split reveal animation rewards scrolling with a satisfying entrance.</div>
+                    <div class="deepdive__tags">
+                        <span class="deepdive__tag">Split Layout</span>
+                        <span class="deepdive__tag">Scroll Reveal</span>
+                        <span class="deepdive__tag">Trust Signals</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blog -->
+        <div class="deepdive">
+            <div class="deepdive__row">
+                <div class="deepdive__image">
+                    <img src="./blog-crop.png" alt="Blog Section">
+                </div>
+                <div class="deepdive__text">
+                    <div class="deepdive__number">05</div>
+                    <div class="deepdive__title">Blog Cards</div>
+                    <div class="deepdive__desc">Content marketing meets clean UI. Each card uses a hover-triggered slide-up overlay to reveal the article title and excerpt — keeping the grid visually clean while still communicating content depth on interaction.</div>
+                    <div class="deepdive__tags">
+                        <span class="deepdive__tag">Hover Reveal</span>
+                        <span class="deepdive__tag">Slide Up</span>
+                        <span class="deepdive__tag">Content Marketing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══════════════════════════════════════════════
+         05 — ANIMATION CALLOUTS
+         ═══════════════════════════════════════════════ -->
+    <section class="animation-section">
+        <div class="section-label">04 — Motion</div>
+        <h2 class="section-heading">Animation System</h2>
+        <p class="section-subtext">Purposeful motion guides the user's eye and rewards interaction. Every animation serves a function — nothing moves for decoration alone.</p>
+
+        <div class="animation-grid">
+            <div class="anim-card">
+                <div class="anim-card__visual anim-card__visual--hero">
+                    <div class="anim-card__icon">↔</div>
+                    <div class="anim-card__motion-label">Opacity Crossfade</div>
+                </div>
+                <div class="anim-card__body">
+                    <div class="anim-card__title">Banner Carousel</div>
+                    <div class="anim-card__desc">Three hero slides auto-rotate with smooth opacity crossfade. Timer-driven, no user action required.</div>
+                    <div class="anim-card__specs">
+                        <span class="anim-spec">Duration: <span>1s</span></span>
+                        <span class="anim-spec">Interval: <span>5s</span></span>
+                        <span class="anim-spec">Trigger: <span>Auto</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="anim-card">
+                <div class="anim-card__visual anim-card__visual--scroll">
+                    <div class="anim-card__icon">↑</div>
+                    <div class="anim-card__motion-label">Fade + TranslateY</div>
+                </div>
+                <div class="anim-card__body">
+                    <div class="anim-card__title">Scroll Reveal Cards</div>
+                    <div class="anim-card__desc">Product cards fade up with staggered delays as they enter the viewport. IntersectionObserver triggers at 20% visibility.</div>
+                    <div class="anim-card__specs">
+                        <span class="anim-spec">Duration: <span>0.6s</span></span>
+                        <span class="anim-spec">Stagger: <span>0.1s</span></span>
+                        <span class="anim-spec">Trigger: <span>Scroll</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="anim-card">
+                <div class="anim-card__visual anim-card__visual--marquee">
+                    <div class="anim-card__icon">←←←</div>
+                    <div class="anim-card__motion-label">CSS Keyframes</div>
+                </div>
+                <div class="anim-card__body">
+                    <div class="anim-card__title">Testimonial Marquee</div>
+                    <div class="anim-card__desc">Infinite horizontal scroll using translateX keyframes. Duplicated cards create a seamless loop with no visible seam.</div>
+                    <div class="anim-card__specs">
+                        <span class="anim-spec">Duration: <span>20s</span></span>
+                        <span class="anim-spec">Easing: <span>Linear</span></span>
+                        <span class="anim-spec">Trigger: <span>Continuous</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="anim-card">
+                <div class="anim-card__visual anim-card__visual--hover">
+                    <div class="anim-card__icon">↕</div>
+                    <div class="anim-card__motion-label">TranslateY Reveal</div>
+                </div>
+                <div class="anim-card__body">
+                    <div class="anim-card__title">Blog Hover Overlay</div>
+                    <div class="anim-card__desc">Dark overlay slides up from bottom on hover to reveal article title and excerpt. Clean entry, clean exit.</div>
+                    <div class="anim-card__specs">
+                        <span class="anim-spec">Duration: <span>0.4s</span></span>
+                        <span class="anim-spec">Easing: <span>Ease</span></span>
+                        <span class="anim-spec">Trigger: <span>Hover</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══════════════════════════════════════════════
+         06 — COLOR & TYPE SYSTEM
+         ═══════════════════════════════════════════════ -->
+    <section class="system-section">
+        <div class="section-label">05 — Visual System</div>
+        <h2 class="section-heading">Colour & Typography</h2>
+        <p class="section-subtext">A restrained palette anchored by IVG's signature red, extended with six product-line gradients that create instant category recognition.</p>
+
+        <div class="system-grid">
+            <!-- Colors -->
+            <div>
+                <div style="margin-top: 50px;">
+                    <div class="color-group-label">Brand Core</div>
+                    <div class="color-row">
+                        <div class="color-swatch">
+                            <div class="color-swatch__circle color-swatch__circle--large" style="background: #ee1b2b;"></div>
+                            <span class="color-swatch__label">IVG Red</span>
+                            <span class="color-swatch__hex">#ee1b2b</span>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="color-swatch__circle color-swatch__circle--large" style="background: #000000;"></div>
+                            <span class="color-swatch__label">Black</span>
+                            <span class="color-swatch__hex">#000000</span>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="color-swatch__circle color-swatch__circle--large" style="background: #ffffff; border-color: rgba(255,255,255,0.2);"></div>
+                            <span class="color-swatch__label">White</span>
+                            <span class="color-swatch__hex">#ffffff</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="color-group-label">Product Line Gradients</div>
+                    <div class="gradient-row">
+                        <div class="gradient-swatch" style="background: linear-gradient(135deg, #8b5cf6, #6366f1);">
+                            <span class="gradient-swatch__label">Pro</span>
+                        </div>
+                        <div class="gradient-swatch" style="background: linear-gradient(135deg, #06b6d4, #3b82f6);">
+                            <span class="gradient-swatch__label">Smart Max</span>
+                        </div>
+                        <div class="gradient-swatch" style="background: linear-gradient(135deg, #ef4444, #f97316);">
+                            <span class="gradient-swatch__label">XL35</span>
+                        </div>
+                    </div>
+                    <div class="gradient-row" style="margin-top: 32px;">
+                        <div class="gradient-swatch" style="background: linear-gradient(135deg, #eab308, #f59e0b);">
+                            <span class="gradient-swatch__label">Reload</span>
+                        </div>
+                        <div class="gradient-swatch" style="background: linear-gradient(135deg, #ec4899, #d946ef);">
+                            <span class="gradient-swatch__label">2400</span>
+                        </div>
+                        <div class="gradient-swatch" style="background: linear-gradient(135deg, #10b981, #14b8a6);">
+                            <span class="gradient-swatch__label">E-Liquid</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 50px;">
+                    <div class="color-group-label">UI Neutrals</div>
+                    <div class="color-row">
+                        <div class="color-swatch">
+                            <div class="color-swatch__circle" style="background: #f9f9f9; border-color: rgba(255,255,255,0.15);"></div>
+                            <span class="color-swatch__hex">#f9f9f9</span>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="color-swatch__circle" style="background: #f0f0f0; border-color: rgba(255,255,255,0.15);"></div>
+                            <span class="color-swatch__hex">#f0f0f0</span>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="color-swatch__circle" style="background: #666666;"></div>
+                            <span class="color-swatch__hex">#666666</span>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="color-swatch__circle" style="background: #333333;"></div>
+                            <span class="color-swatch__hex">#333333</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typography -->
+            <div>
+                <div style="margin-top: 50px;">
+                    <div class="type-samples">
+                        <div class="type-sample">
+                            <span class="type-sample__weight">Extra Bold — 800</span>
+                            <span class="type-sample__preview type-sample__preview--800">Discover</span>
+                        </div>
+                        <div class="type-sample">
+                            <span class="type-sample__weight">Bold — 700</span>
+                            <span class="type-sample__preview type-sample__preview--700">IVG Smart Max</span>
+                        </div>
+                        <div class="type-sample">
+                            <span class="type-sample__weight">Semi Bold — 600</span>
+                            <span class="type-sample__preview type-sample__preview--600">Award Winning Excellence</span>
+                        </div>
+                        <div class="type-sample">
+                            <span class="type-sample__weight">Regular — 400</span>
+                            <span class="type-sample__preview type-sample__preview--400">Experience up to 10K puffs with our premium disposable vape range.</span>
+                        </div>
+                        <div class="type-sample">
+                            <span class="type-sample__weight">Light — 300</span>
+                            <span class="type-sample__preview type-sample__preview--300">Customer service is exceptional and the delivery is always fast.</span>
+                        </div>
+                    </div>
+
+                    <div class="type-family">
+                        <div class="type-family__name">Poppins</div>
+                        <div class="type-family__source">Google Fonts — Weights 300–800</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══════════════════════════════════════════════
+         07 — FULL HOMEPAGE SCROLL
+         ═══════════════════════════════════════════════ -->
+    <section class="fullscroll-section">
+        <div class="section-label">06 — Final Design</div>
+        <h2 class="section-heading">The Full Picture</h2>
+        <p class="section-subtext">The complete homepage in a single scroll — every section, every detail, every pixel considered.</p>
+
+        <div class="fullscroll-frame">
+            <div class="fullscroll-frame__browser-bar">
+                <div class="browser-dot browser-dot--red"></div>
+                <div class="browser-dot browser-dot--yellow"></div>
+                <div class="browser-dot browser-dot--green"></div>
+                <div class="browser-url">ivgvape.com</div>
+            </div>
+            <img src="./homepage-full.jpg" alt="IVG Homepage — Full Design">
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         08 — CLOSING
+         ═══════════════════════════════════════════════ -->
+    <section class="closing-section">
+        <div class="closing-logo">IVG</div>
+        <div class="closing-text">Homepage Redesign — 2025</div>
+    </section>
+
+</div>
+
+</body>
+</html>
