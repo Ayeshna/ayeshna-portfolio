@@ -243,20 +243,43 @@
   transform-style: preserve-3d;
 }
 
+/* ----- Two layered portrait images (hover swap) ----- */
 .about-portrait__bg {
   position: absolute;
   inset: 0;
   border-radius: 4px;
-  background-color: #0e1018;
-  background-image:
-    radial-gradient(
-      ellipse 80% 60% at 50% 100%,
-      rgba(0, 255, 65, 0.12) 0%,
-      rgba(0, 255, 65, 0.04) 40%,
-      transparent 70%
-    );
+  background-color: #08090C;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
   z-index: 0;
-  /* Replace with: background-image: url('/assets/portrait.jpg'); background-size: cover; */
+  transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Subtle electric green vignette behind the character */
+  box-shadow: inset 0 0 80px rgba(0, 255, 65, 0.04);
+}
+
+/* Default (no hover) — side profile visible */
+.about-portrait__bg--side {
+  background-image: url('/portrait-side.jpg');
+  opacity: 1;
+}
+
+/* Hover state — front-facing reveals */
+.about-portrait__bg--front {
+  background-image: url('/portrait-front.jpg');
+  opacity: 0;
+}
+
+/* Desktop with mouse — cross-fade on hover */
+@media (hover: hover) {
+  .about-portrait:hover .about-portrait__bg--side  { opacity: 0; }
+  .about-portrait:hover .about-portrait__bg--front { opacity: 1; }
+}
+
+/* Touch devices — default to front-facing (no hover possible) */
+@media (hover: none) {
+  .about-portrait__bg--side  { opacity: 0; }
+  .about-portrait__bg--front { opacity: 1; }
 }
 
 .about-portrait__glare {

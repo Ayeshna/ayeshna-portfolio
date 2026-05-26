@@ -100,7 +100,9 @@ function AboutPortrait() {
         onMouseLeave={handleMouseLeave}
         style={{ rotateX, rotateY, transformPerspective: 800 }}
       >
-        <div className="about-portrait__bg" />
+        {/* Two layered portrait images — side default, front-facing on hover */}
+        <div className="about-portrait__bg about-portrait__bg--side" aria-hidden="true" />
+        <div className="about-portrait__bg about-portrait__bg--front" aria-hidden="true" />
 
         <motion.div
           className="about-portrait__glare"
