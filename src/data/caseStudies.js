@@ -10,6 +10,7 @@ export const caseStudies = {
     sector: 'Vape · Cinema & OOH',
     year:   '2024',
     role:   'Lead Visual Designer',
+    tools:  ['Photoshop', 'Illustrator', 'Cinema 4D', 'After Effects', 'Adobe Dimension', 'Midjourney'],
     problem:
       'IVG needed to break out of standard product-shot category visuals and stake its claim as a premium lifestyle brand on screens, transport hoardings and high-traffic urban surfaces across the UK and Europe.',
     goal:
@@ -34,6 +35,7 @@ export const caseStudies = {
     sector: 'E-commerce · UI/UX',
     year:   '2024',
     role:   'Lead UI Designer',
+    tools:  ['Figma', 'Photoshop', 'Illustrator', 'Adobe XD'],
     problem:
       'IVG’s homepage was structured as a static category dump — heavy on product imagery, weak on storytelling, and not optimised for the buyer journey from awareness to conversion.',
     goal:
@@ -63,6 +65,7 @@ export const caseStudies = {
     sector: 'Digital Marketplace + CRM',
     year:   '2021 – 2023',
     role:   'UI/UX & Visual Designer',
+    tools:  ['Figma', 'Sketch', 'Illustrator', 'Photoshop', 'InVision'],
     problem:
       'Viosimos operated with a fragmented visual identity — the marketplace, CRM tool, and marketing site all looked like they belonged to different companies.',
     goal:
@@ -85,6 +88,7 @@ export const caseStudies = {
     sector: 'Automotive Performance & Modification',
     year:   '2024',
     role:   'Brand Lead',
+    tools:  ['Illustrator', 'Photoshop', 'InDesign', 'Cinema 4D', 'Midjourney'],
     problem:
       'BR01 Customs needed an identity that signalled premium performance engineering — not generic biker/automotive branding — and could carry through every touchpoint from Instagram to sponsored events.',
     goal:
@@ -112,6 +116,7 @@ export const caseStudies = {
     sector: 'FMCG · Heritage Food',
     year:   '2020 – 2021',
     role:   'Brand & Packaging Lead',
+    tools:  ['Illustrator', 'Photoshop', 'InDesign'],
     problem:
       'A small heritage chutney brand entering a crowded Indian supermarket shelf needed a visual identity that could compete with established condiment players without losing its hand-made, heritage-led story.',
     goal:

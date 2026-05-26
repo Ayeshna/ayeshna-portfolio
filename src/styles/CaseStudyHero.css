@@ -211,6 +211,81 @@
   transform: translateY(-1px);
 }
 
+/* ==========================================================================
+   Tools Used — horizontal pill list at the bottom of the hero block
+   ========================================================================== */
+.cs-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.85rem;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cs-tools__label {
+  font-family: 'Heavitas', sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-right: 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.cs-tools__label::before {
+  content: '';
+  width: 18px;
+  height: 1.5px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.cs-tools__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.cs-tools__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px 4px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.025);
+  font-family: 'Lato', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.78);
+  white-space: nowrap;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.cs-tools__item:hover {
+  border-color: rgba(0, 255, 65, 0.4);
+  background: rgba(0, 255, 65, 0.06);
+  color: var(--white);
+}
+
+.cs-tools__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px rgba(0, 255, 65, 0.5);
+  flex-shrink: 0;
+}
+
 /* ---------- Mobile padding tuning ---------- */
 @media (max-width: 640px) {
   .cs-hero {
@@ -226,4 +301,7 @@
   .cs-block__list li {
     font-size: 12px;
   }
+  .cs-tools__label    { font-size: 9px; letter-spacing: 0.12em; }
+  .cs-tools__item     { font-size: 10px; padding: 3px 8px 3px 7px; }
+  .cs-tools__dot      { width: 4px; height: 4px; }
 }

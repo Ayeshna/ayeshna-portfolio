@@ -213,8 +213,8 @@
 .bc-3d       { grid-area: threed;   }
 .bc-ai       { grid-area: ai;       }
 
-/* ─────────── DESKTOP — original 3-row layout ─────────── */
-@media (min-width: 768px) {
+/* ─────────── DESKTOP — original 3-row layout (≥1024 px so iPad portrait stays on mobile layout) ─────────── */
+@media (min-width: 1024px) {
   .about__grid {
     gap: 1rem;
     grid-template-columns: repeat(12, 1fr);
@@ -786,11 +786,11 @@
 }
 
 /* ==========================================================================
-   ███████  MOBILE OVERRIDES  ███████
-   Stats + Timeline + Creative + Adobe + 3D + AI all run 3-per-row at 375px,
-   which means ~108 px per card. Aggressive content trimming below.
+   ███████  MOBILE + TABLET PORTRAIT OVERRIDES  ███████
+   Active below 1024 px (covers all iPad portrait sizes).
+   Stats + Timeline + Creative + Adobe + 3D + AI run 3-per-row.
    ========================================================================== */
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
 
   /* ── Reduce section padding — tighten gap between Work and About ── */
   .about { padding: 2.5rem 0 2rem; }

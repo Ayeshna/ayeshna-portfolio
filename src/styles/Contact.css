@@ -276,8 +276,8 @@ a.contact__info-item:hover {
   transform: none;
 }
 
-/* ---------- Mobile — tighter section padding ---------- */
-@media (max-width: 767px) {
+/* ---------- Mobile/Tablet portrait — tighter section padding ---------- */
+@media (max-width: 1023px) {
   .contact {
     padding: 2rem 0 3rem;
   }

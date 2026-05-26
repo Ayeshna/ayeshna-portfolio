@@ -21,19 +21,45 @@ function Contact() {
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, margin: '-60px' })
 
+  /* ── Formspree endpoint — replace YOUR_FORM_ID with the ID Formspree gives you ── */
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID'
+
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' })
-  const [submitted, setSubmitted] = useState(false)
+  const [status, setStatus] = useState('idle')  /* idle | sending | success | error */
 
   function handleChange(e) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    setSubmitted(true)
-    setTimeout(() => setSubmitted(false), 3000)
-    setForm({ name: '', email: '', phone: '', message: '' })
+    setStatus('sending')
+
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(form),
+      })
+
+      if (res.ok) {
+        setStatus('success')
+        setForm({ name: '', email: '', phone: '', message: '' })
+        setTimeout(() => setStatus('idle'), 5000)
+      } else {
+        setStatus('error')
+        setTimeout(() => setStatus('idle'), 5000)
+      }
+    } catch (err) {
+      setStatus('error')
+      setTimeout(() => setStatus('idle'), 5000)
+    }
   }
+
+  const submitted = status === 'success'
 
   /* 2×2 grid: top row = Email + Phone, bottom row = Location + LinkedIn */
   const contactInfo = [
@@ -59,7 +85,7 @@ function Contact() {
       icon: ExternalLink,
       label: 'LinkedIn',
       value: 'Connect on LinkedIn',
-      href: 'https://linkedin.com/in/ayeshnavinayak',
+      href: 'https://www.linkedin.com/in/ayeshna-vinayak/',
     },
   ]
 
@@ -206,11 +232,12 @@ function Contact() {
               <button
                 className="contact__submit"
                 type="submit"
-                disabled={submitted}
+                disabled={status === 'sending' || status === 'success'}
               >
-                {submitted ? 'Sent ✓' : (
-                  <>Submit <Send size={14} /></>
-                )}
+                {status === 'sending' && 'Sending…'}
+                {status === 'success' && 'Message sent ✓'}
+                {status === 'error'   && 'Try again — error sending'}
+                {status === 'idle'    && (<>Submit <Send size={14} /></>)}
               </button>
             </form>
           </motion.div>

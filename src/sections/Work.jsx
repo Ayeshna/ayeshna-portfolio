@@ -6,13 +6,15 @@ import { featuredProjects, archiveProjects } from '../data/projects'
 import '../styles/Work.css'
 
 function Work({ onProjectClick, onArchiveOpen }) {
-  /* ── Mobile detection — swap gallery below 768 px ── */
+  /* ── Mobile/tablet detection — swap gallery below 1024 px ──
+     Covers all iPad portrait sizes (744–1024 px) which can't fit the
+     1000 px-diameter radial wheel comfortably.                       */
   const [isMobile, setIsMobile] = useState(() =>
-    typeof window !== 'undefined' && window.innerWidth < 768
+    typeof window !== 'undefined' && window.innerWidth < 1024
   )
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768)
+    const check = () => setIsMobile(window.innerWidth < 1024)
     window.addEventListener('resize', check)
     return () => window.removeEventListener('resize', check)
   }, [])

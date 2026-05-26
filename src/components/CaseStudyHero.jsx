@@ -75,6 +75,21 @@ function CaseStudyHero({ data }) {
           )}
         </div>
       </div>
+
+      {/* ───── Tools Used row ───── */}
+      {data.tools && data.tools.length > 0 && (
+        <div className="cs-tools">
+          <span className="cs-tools__label">Tools Used</span>
+          <ul className="cs-tools__list">
+            {data.tools.map((tool, i) => (
+              <li key={i} className="cs-tools__item">
+                <span className="cs-tools__dot" aria-hidden="true" />
+                {tool}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </section>
   )
 }
