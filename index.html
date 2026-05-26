@@ -39,6 +39,37 @@
     />
   </head>
   <body>
+    <!-- Skip to main content — keyboard / screen-reader accessibility -->
+    <a href="#work" class="skip-to-content">Skip to main content</a>
+
+    <!-- JS-disabled fallback -->
+    <noscript>
+      <div style="
+        max-width: 640px;
+        margin: 8rem auto;
+        padding: 2rem;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        color: #fff;
+        background-color: #08090C;
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 4px;
+        text-align: center;
+        line-height: 1.6;
+      ">
+        <h1 style="color: #00FF41; font-size: 1.5rem; margin: 0 0 1rem;">JavaScript Required</h1>
+        <p style="margin: 0 0 1rem; color: rgba(255,255,255,0.75);">
+          Ayeshna Vinayak's portfolio is built with React and needs JavaScript enabled to run.
+          Please turn JavaScript on in your browser to view the work.
+        </p>
+        <p style="margin: 0;">
+          In the meantime, you can reach Ayeshna at
+          <a href="mailto:ayeshna19@icloud.com" style="color: #00FF41;">ayeshna19@icloud.com</a>
+          or on
+          <a href="https://www.linkedin.com/in/ayeshna-vinayak/" style="color: #00FF41;">LinkedIn</a>.
+        </p>
+      </div>
+    </noscript>
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

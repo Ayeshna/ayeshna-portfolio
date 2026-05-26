@@ -32,3 +32,30 @@ h5,
 h6 {
   font-family: 'Heavitas', sans-serif;
 }
+
+/* ==========================================================================
+   Skip to content — invisible until keyboard-focused (accessibility)
+   ========================================================================== */
+.skip-to-content {
+  position: fixed;
+  top: -40px;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  background-color: var(--accent);
+  color: #08090C;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: top 0.2s ease;
+}
+
+.skip-to-content:focus,
+.skip-to-content:focus-visible {
+  top: 1rem;
+  outline: 2px solid #08090C;
+  outline-offset: 2px;
+}

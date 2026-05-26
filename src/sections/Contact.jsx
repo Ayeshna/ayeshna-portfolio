@@ -199,6 +199,9 @@ function Contact() {
                   value={form.name}
                   onChange={handleChange}
                   required
+                  autoComplete="name"
+                  minLength={2}
+                  maxLength={80}
                 />
               </div>
 
@@ -213,6 +216,9 @@ function Contact() {
                   value={form.email}
                   onChange={handleChange}
                   required
+                  autoComplete="email"
+                  maxLength={120}
+                  inputMode="email"
                 />
               </div>
 
@@ -226,6 +232,9 @@ function Contact() {
                   placeholder="+44 ..."
                   value={form.phone}
                   onChange={handleChange}
+                  autoComplete="tel"
+                  maxLength={20}
+                  inputMode="tel"
                 />
               </div>
 
@@ -240,6 +249,8 @@ function Contact() {
                   value={form.message}
                   onChange={handleChange}
                   required
+                  minLength={10}
+                  maxLength={2000}
                 />
               </div>
 
