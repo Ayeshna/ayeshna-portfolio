@@ -191,7 +191,6 @@ function Contact() {
               >
                 <Download size={16} strokeWidth={2} />
                 <span>Download CV</span>
-                <span className="contact__cv-download-meta">PDF, ATS-ready</span>
               </motion.a>
             </motion.div>
           </div>
