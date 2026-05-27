@@ -19,6 +19,23 @@ function Hero() {
           <li>
             <a href="#contact">Contact</a>
           </li>
+          <li>
+            <a
+              href="/Ayeshna_Vinayak_CV.pdf"
+              download="Ayeshna_Vinayak_Senior_Visual_Designer_CV.pdf"
+              className="hero-nav__cv"
+              aria-label="Download CV"
+            >
+              CV
+              <svg
+                width="10" height="10" viewBox="0 0 16 16"
+                fill="none" aria-hidden="true" style={{ marginLeft: 4 }}
+              >
+                <path d="M8 3v9M3.5 8l4.5 4.5L12.5 8" stroke="currentColor"
+                      strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+          </li>
         </ul>
       </nav>
 

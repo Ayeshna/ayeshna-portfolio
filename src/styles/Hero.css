@@ -67,6 +67,22 @@
   color: var(--accent);
 }
 
+/* CV link — sits with the others, hint icon shows it's a download (not a section jump) */
+.hero-nav__cv {
+  display: inline-flex;
+  align-items: center;
+}
+
+.hero-nav__cv svg {
+  opacity: 0.55;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.hero-nav__cv:hover svg {
+  opacity: 1;
+  transform: translateY(1px);
+}
+
 /* ---------- Hero section ---------- */
 .hero {
   position: relative;
