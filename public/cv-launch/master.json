@@ -1,0 +1,109 @@
+{
+  "name": "AYESHNA VINAYAK",
+  "title": "Senior Visual Designer",
+  "contact": {
+    "email": "ayeshna19@icloud.com",
+    "phone": "+44 7741 336021",
+    "location": "Manchester, UK",
+    "website": "ayeshnavinayak.com",
+    "linkedin": "linkedin.com/in/ayeshna-vinayak"
+  },
+  "summary": "Senior Visual Designer with 7+ years across brand systems, product UI, 3D and motion. Currently shaping IVG's global creative output across cinema, transport and digital, where I led the e-commerce homepage redesign and built the campaign system now used for the brand's premium-tier launches. Open to Senior, Lead and Brand Designer roles in London and Manchester.",
+  "experience": [
+    {
+      "title": "Senior Visual Designer (Brand & UI)",
+      "company": "IVG",
+      "location": "Manchester, UK",
+      "dates": "June 2024 to Present",
+      "bullets": [
+        "Designed and shipped the IVG e-commerce homepage at ivapegreat.com. Conversion up 38%, bounce rate down 63%, time-on-page up 70%, click-through on featured product blocks up 42%, and 38% repeat-customer rate post-launch.",
+        "Art-directed the IVG x Bespoke campaign across 8 UK cities at Odeon and Vue cinemas during the Deadpool vs Wolverine release. Full London bus and Black Cab livery for two months, and 10 private vehicles for six months. The system became the template for all subsequent premium-tier IVG launches.",
+        "Built 3D product hero scenes in Cinema 4D to replace stock product photography across the brand. Pipeline now supports campaigns across Europe and the UAE.",
+        "Integrated Midjourney, Firefly and Claude Code into the studio's design workflow, cutting concept iteration time from days to hours.",
+        "Mentored junior designers on craft standards, brand language and motion-led output across global campaign visuals.",
+        "Designed print and digital assets across magazine ads, CDUs, posters, tent cards, wobblers, website banners, social posts and email creatives, aligned to brand and campaign goals."
+      ]
+    },
+    {
+      "title": "Lead Designer (Web & Brand)",
+      "company": "Red Ox Fashion",
+      "location": "Remote (UK)",
+      "dates": "June 2023 to May 2024",
+      "bullets": [
+        "Led the redesign of two Shopify e-commerce websites for fashion brands. Conversion rate up 12% through a restructured checkout and clearer calls to action.",
+        "Designed seasonal campaign visuals across web, email, packaging and social. Email click-through up 15% on product launches.",
+        "Built a multi-brand design system that brought consistency across marketing channels and cut asset production time.",
+        "Ran A/B tests on landing page hero modules and product cards to inform iteration."
+      ]
+    },
+    {
+      "title": "UI/UX and Visual Designer",
+      "company": "Viosimos United Pvt Ltd",
+      "location": "Remote",
+      "dates": "August 2021 to May 2023",
+      "bullets": [
+        "Redesigned the digital marketplace and CRM as a unified visual system. Conversion up 12%, social media engagement up 22%, and brand recognition up 14% per internal survey.",
+        "Owned user research (surveys, interviews, A/B testing, usability studies), wireframes, prototypes and high-fidelity UI in Figma.",
+        "Created brand identity, packaging mocks, infographics and social campaign visuals across the company's digital surfaces.",
+        "Designed a new logo and brand style guide that became the foundation for all marketing output."
+      ]
+    },
+    {
+      "title": "Freelance Brand and Product Designer",
+      "company": "Self-Employed",
+      "location": "Mumbai, India and UK",
+      "dates": "January 2020 to August 2021",
+      "bullets": [
+        "Delivered full brand identity, packaging and web design services to over 15 small businesses across lifestyle, FMCG and craft brands.",
+        "Designed Nani's Chutney from naming through to full packaging system (2 SKUs across 3 variants each, 6 SKUs total). Sales up 25% within the first three months. Brand now stocked at D-Mart across Mumbai and Pune.",
+        "Designed event marketing collateral for YouTube FanFest, AIB Fest and Only Much Louder in India.",
+        "Partnered with Welspun, Rotary and GST Genie on brand identity systems and campaign visuals."
+      ]
+    },
+    {
+      "title": "Content Designer",
+      "company": "ELREC",
+      "location": "Edinburgh, UK",
+      "dates": "January 2019 to December 2020",
+      "bullets": [
+        "Created visual content for blog hero imagery, social graphics and email creatives across the brand's UK presence.",
+        "Optimised content for SEO and analysed performance to inform the editorial calendar."
+      ]
+    }
+  ],
+  "skills": {
+    "Brand Systems": "Brand identity, visual language, typography, art direction, brand guidelines, print production, packaging",
+    "Product and UI": "Figma, Adobe XD, Sketch, UX research, user interviews, A/B testing, usability testing, wireframing, prototyping, design systems, responsive design, information architecture",
+    "3D and Motion": "Cinema 4D, Adobe Dimension, motion graphics support",
+    "AI-Integrated Workflow": "Midjourney, Adobe Firefly, Claude Code, Sora, prompt engineering for design",
+    "Adobe Creative Suite": "Photoshop (Advanced), Illustrator (Advanced), InDesign (Advanced), After Effects (Intermediate)"
+  },
+  "education": [
+    {
+      "degree": "MFA Interactive Arts and Experience Design",
+      "school": "Edinburgh Napier University",
+      "location": "Edinburgh, UK",
+      "dates": "2020 to 2022"
+    },
+    {
+      "degree": "MSc Business Management",
+      "school": "Manchester Metropolitan University",
+      "location": "Manchester, UK",
+      "dates": "2018 to 2019"
+    },
+    {
+      "degree": "BDes Communication Design",
+      "school": "National Institute of Fashion Technology",
+      "location": "Mumbai, India",
+      "dates": "2013 to 2017"
+    }
+  ],
+  "certificates": [
+    {
+      "name": "UI/UX for Gaming",
+      "provider": "ELVTR, led by Ariel Mallo (Principal UI Artist, Frontier Developments)",
+      "dates": "September 2023 to December 2023"
+    }
+  ],
+  "languages": "English (Native), Hindi (Native)"
+}

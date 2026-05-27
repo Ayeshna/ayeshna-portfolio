@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="theme-color" content="#08090C" />
+  <title>CV.Launch</title>
+
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #08090C;
+      --bg-soft: #0d0e12;
+      --accent: #00FF41;
+      --accent-soft: rgba(0, 255, 65, 0.12);
+      --accent-line: rgba(0, 255, 65, 0.3);
+      --white: #ffffff;
+      --grey: #aaa;
+      --grey-dim: rgba(255, 255, 255, 0.5);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.18);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 400;
+      min-height: 100vh;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-image:
+        radial-gradient(circle at 20% 10%, rgba(0, 255, 65, 0.04), transparent 40%),
+        radial-gradient(circle at 80% 90%, rgba(0, 255, 65, 0.03), transparent 40%);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 4rem;
+    }
+
+    @media (min-width: 640px) {
+      .container { padding: 2.5rem 2rem 5rem; }
+    }
+
+    /* ---------- HEADER ---------- */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand__name {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--white);
+    }
+
+    .brand__name .accent { color: var(--accent); }
+
+    .brand__sub {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0.85;
+    }
+
+    .header__status {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grey-dim);
+      text-align: right;
+    }
+    .header__status-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      margin-right: 6px;
+      animation: pulse 2s ease-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; }
+      50% { opacity: 0.45; }
+    }
+
+    /* ---------- PASSCODE GATE ---------- */
+    #gate {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+    #gate.hidden { display: none; }
+    .gate__card {
+      max-width: 360px;
+      width: 90%;
+      padding: 2rem 1.75rem;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      text-align: center;
+    }
+    .gate__title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+    .gate__sub {
+      font-size: 0.8rem;
+      color: var(--grey-dim);
+      margin-bottom: 1.5rem;
+    }
+    .gate__input {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border-strong);
+      border-radius: 4px;
+      color: var(--white);
+      font-family: inherit;
+      font-size: 0.95rem;
+      text-align: center;
+      letter-spacing: 0.3em;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    .gate__input:focus { border-color: var(--accent); }
+    .gate__error {
+      color: #ff6464;
+      font-size: 0.75rem;
+      margin-top: 0.6rem;
+      min-height: 1em;
+    }
+
+    /* ---------- INPUT SECTION ---------- */
+    .input-section {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem 1.25rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    @media (min-width: 640px) {
+      .input-section { padding: 1.75rem 1.75rem; }
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .section-label::before {
+      content: '';
+      width: 18px;
+      height: 1.5px;
+      background: var(--accent);
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    @media (min-width: 640px) {
+      .field-row { grid-template-columns: 1fr 1fr; }
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field__label {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grey-dim);
+    }
+
+    .field__input,
+    .field__textarea {
+      background: var(--bg);
+      border: 1px solid var(--border-strong);
+      border-radius: 4px;
+      padding: 0.7rem 0.85rem;
+      color: var(--white);
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .field__input:focus,
+    .field__textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(0, 255, 65, 0.12);
+    }
+
+    .field__textarea {
+      min-height: 200px;
+      resize: vertical;
+      line-height: 1.5;
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+      font-size: 0.82rem;
+    }
+
+    .generate-btn {
+      width: 100%;
+      margin-top: 0.5rem;
+      padding: 0.95rem 1.5rem;
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    }
+    .generate-btn:hover {
+      background: #4dff70;
+      box-shadow: 0 0 22px rgba(0, 255, 65, 0.3);
+      transform: translateY(-1px);
+    }
+    .generate-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* ---------- OUTPUT SECTION ---------- */
+    .output-section {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem 1.25rem;
+      margin-bottom: 1.5rem;
+      display: none;
+    }
+    .output-section.visible { display: block; }
+    @media (min-width: 640px) {
+      .output-section { padding: 1.75rem; }
+    }
+
+    /* ---------- ATS SCORE ---------- */
+    .ats-score {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.25rem;
+    }
+
+    .ats-score__circle {
+      flex-shrink: 0;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: rgba(0, 255, 65, 0.06);
+      box-shadow: 0 0 24px rgba(0, 255, 65, 0.15);
+    }
+
+    .ats-score__number {
+      font-family: 'Lato', sans-serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .ats-score__max {
+      font-size: 0.6rem;
+      color: var(--grey-dim);
+      margin-top: 2px;
+      letter-spacing: 0.1em;
+    }
+
+    .ats-score__detail {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .ats-score__title {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .ats-score__breakdown {
+      display: grid;
+      gap: 6px;
+    }
+
+    .ats-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      font-size: 0.78rem;
+    }
+    .ats-row__label {
+      color: var(--grey);
+    }
+    .ats-row__value {
+      color: var(--white);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ---------- DOWNLOAD BUTTONS ---------- */
+    .downloads {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    @media (min-width: 640px) {
+      .downloads { grid-template-columns: 1fr 1fr; }
+    }
+
+    .download-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 0.95rem 1.1rem;
+      background: var(--bg);
+      border: 1px solid var(--accent-line);
+      border-radius: 4px;
+      color: var(--accent);
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+    }
+    .download-btn:hover {
+      background: rgba(0, 255, 65, 0.1);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .download-btn__icon {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ---------- PREVIEW ---------- */
+    .preview {
+      margin-top: 1rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .preview__title {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .preview__matched {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 1rem;
+    }
+
+    .keyword-chip {
+      padding: 4px 10px;
+      background: rgba(0, 255, 65, 0.08);
+      border: 1px solid var(--accent-line);
+      border-radius: 999px;
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+
+    .preview__hint {
+      font-size: 0.78rem;
+      color: var(--grey-dim);
+      line-height: 1.6;
+    }
+
+    /* ---------- FOOTER ---------- */
+    .footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.7rem;
+      color: var(--grey-dim);
+      letter-spacing: 0.05em;
+    }
+    .footer a { color: var(--accent); text-decoration: none; }
+
+    /* Plus corner markers — editorial language */
+    .plus-corner {
+      position: absolute;
+      color: var(--accent);
+      opacity: 0.35;
+      font-family: monospace;
+      font-size: 14px;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .plus-corner--tl { top: -7px; left: -7px; }
+    .plus-corner--tr { top: -7px; right: -7px; }
+    .plus-corner--bl { bottom: -7px; left: -7px; }
+    .plus-corner--br { bottom: -7px; right: -7px; }
+  </style>
+</head>
+<body>
+
+  <!-- PASSCODE GATE -->
+  <div id="gate">
+    <div class="gate__card">
+      <div class="gate__title">CV.Launch</div>
+      <div class="gate__sub">Private tool — enter passcode</div>
+      <input type="password" id="gate-input" class="gate__input" placeholder="••••" autofocus />
+      <div id="gate-error" class="gate__error"></div>
+    </div>
+  </div>
+
+  <!-- MAIN APP -->
+  <div class="container">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="brand">
+        <div class="brand__name">CV<span class="accent">.Launch</span></div>
+        <div class="brand__sub">Tailored application generator</div>
+      </div>
+      <div class="header__status">
+        <span class="header__status-dot"></span>
+        <span id="status-text">Ready</span>
+      </div>
+    </header>
+
+    <!-- INPUT -->
+    <section class="input-section">
+      <span class="plus-corner plus-corner--tl">+</span>
+      <span class="plus-corner plus-corner--tr">+</span>
+      <span class="plus-corner plus-corner--bl">+</span>
+      <span class="plus-corner plus-corner--br">+</span>
+
+      <div class="section-label">Job target</div>
+
+      <div class="field-row">
+        <div class="field">
+          <label class="field__label" for="company">Company</label>
+          <input id="company" class="field__input" type="text" placeholder="e.g. Monzo" autocomplete="off" />
+        </div>
+        <div class="field">
+          <label class="field__label" for="role-title">Role title</label>
+          <input id="role-title" class="field__input" type="text" placeholder="e.g. Senior Visual Designer" autocomplete="off" />
+        </div>
+      </div>
+
+      <div class="field" style="margin-bottom: 1rem;">
+        <label class="field__label" for="job-url">Job link (optional)</label>
+        <input id="job-url" class="field__input" type="url" placeholder="https://..." autocomplete="off" />
+      </div>
+
+      <div class="field" style="margin-bottom: 1rem;">
+        <label class="field__label" for="jd">Job description</label>
+        <textarea id="jd" class="field__textarea"
+                  placeholder="Paste the full job description here..."></textarea>
+      </div>
+
+      <button id="generate" class="generate-btn">Generate tailored application</button>
+    </section>
+
+    <!-- OUTPUT -->
+    <section id="output" class="output-section">
+
+      <div class="ats-score">
+        <div class="ats-score__circle">
+          <div class="ats-score__number" id="ats-number">—</div>
+          <div class="ats-score__max">/ 100</div>
+        </div>
+        <div class="ats-score__detail">
+          <div class="ats-score__title">ATS Score</div>
+          <div class="ats-score__breakdown" id="ats-breakdown"></div>
+        </div>
+      </div>
+
+      <div class="downloads">
+        <a id="download-cv" class="download-btn" href="#">
+          <span>Download Tailored CV</span>
+          <svg class="download-btn__icon" viewBox="0 0 16 16">
+            <path d="M8 2v10M4 9l4 4 4-4M3 14h10" />
+          </svg>
+        </a>
+        <a id="download-cover" class="download-btn" href="#">
+          <span>Download Cover Letter</span>
+          <svg class="download-btn__icon" viewBox="0 0 16 16">
+            <path d="M8 2v10M4 9l4 4 4-4M3 14h10" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="preview">
+        <div class="preview__title">Keywords matched from JD</div>
+        <div id="preview-matched" class="preview__matched"></div>
+        <div class="preview__hint" id="preview-hint"></div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div>CV.Launch v1 — built by Ayeshna Vinayak</div>
+      <div>Master data: <code>/cv-launch/master.json</code> · Editable in any text editor</div>
+    </footer>
+
+  </div>
+
+  <script src="./cv-launch.js"></script>
+</body>
+</html>
