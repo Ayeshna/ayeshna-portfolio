@@ -8,8 +8,9 @@ import {
   Send,
   ArrowUpRight,
   Plus,
-  Github,
+  Code,
   Palette,
+  Download,
 } from 'lucide-react'
 import '../styles/Contact.css'
 
@@ -90,7 +91,7 @@ function Contact() {
       href: 'https://www.linkedin.com/in/ayeshna-vinayak/',
     },
     {
-      icon: Github,
+      icon: Code,
       label: 'GitHub',
       value: 'github.com/Ayeshna',
       href: 'https://github.com/Ayeshna',
@@ -177,6 +178,21 @@ function Contact() {
                   )
                 })}
               </motion.div>
+
+              {/* Download CV button — ATS-friendly editable PDF */}
+              <motion.a
+                href="/Ayeshna_Vinayak_CV.pdf"
+                download="Ayeshna_Vinayak_Senior_Visual_Designer_CV.pdf"
+                className="contact__cv-download"
+                initial={{ opacity: 0, y: 10 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.5, duration: 0.45 }}
+                aria-label="Download Ayeshna Vinayak's CV as PDF"
+              >
+                <Download size={16} strokeWidth={2} />
+                <span>Download CV</span>
+                <span className="contact__cv-download-meta">PDF, ATS-ready</span>
+              </motion.a>
             </motion.div>
           </div>
 
